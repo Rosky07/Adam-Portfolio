@@ -4,206 +4,175 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="icon" type="image/png" href="./assets/logo1.PNG">
-    
-    <!-- Google Font: Poppins -->
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-    
-    <!-- Font Awesome 6.4.0 -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"/>
-   
-    <!-- Boxicons CSS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+    <!-- Dans <head> ou avant </body> -->
+<script src="https://cdn.jsdelivr.net/npm/typed.js@2.0.12"></script>
+<script src="script.js"></script>
 
     <link rel="stylesheet" href="style.css">
-    <title>MON PORTFOLIO</title>
+    <title>Portfolio - Adam Poussi</title>
 </head>
 <body>
-    <!-- Header -->
     <header>
-        <button id="logo" aria-label="Menu">
-            <img src="./assets/logo1.PNG" alt="Logo portfolio">
+        <button class="logo scroll-element" aria-label="Logo">
+            <img src="./assets/logo1.PNG" alt="Logo Adam Poussi">
         </button>
         <nav>
             <ul>
                 <li><a href="#accueil">Accueil</a></li>
-                <li><a href="#competence">Compétences</a></li>
+                <li><a href="#competences">Compétences</a></li>
                 <li><a href="#formations">Formations</a></li>
                 <li><a href="#contact">Contact</a></li>
             </ul>
         </nav>
+        <button class="menu-toggle" aria-label="Menu">
+            <span></span>
+            <span></span>
+            <span></span>
+        </button>
     </header>
 
     <main>
-
-
-        <!-- une petite section de prsentation -->
-
-    <section class="home" id="home">
-        <div class="home-content">
-            <h1>Bienvenue sur Mon Portfolio</h1>
-            <h2>Hello, je suis</h2>
-            <h3>Adam Poussi</h3>
-            <h3>et je suis <span class="multiple"></span></h3>
-            <p>Explorez mon univers numérique : un portfolio de développement web où la créativité rencontre la fonctionnalité pour créer des expériences en ligne exceptionnelles.</p>
-            <div class="social-media">
-                <a target="_blank" href="tel:+2250758280357"><i class='bx bxl-whatsapp' ></i></a>
-                <a href="https://www.linkedin.com/in/adam-poussi-66218b9a" target="_blank" aria-label="LinkedIn" title="LinkedIn">
-                        <i class="fa-brands fa-linkedin-in"></i></a>
-                <a  target="_blank" href="https://github.com/Rosky07"><i class='bx bxl-github' ></i></a>
-            </div>
-        </div>
-        <div class="home-img">
-            <img src="./assets/veste1.JPG" alt="">
-        </div>
-    </section>
-
-
-
-        <!-- Hero Section -->
-        <section id="accueil" class="hero">
+        <section id="accueil" class="hero scroll-element">
             <div class="hero-content">
-                <div class="text-content scroll-element">
-                    <div class="propos">
-                        <h2>A <span>Propos</span></h2>
-                        <p>Jeune développeur passionné par le web FullStack et les nouvelles technologies, je suis en quête perpétuelle de connaissances pour accroître mes compétences.</p>
+                <div class="hero-text">
+                    <h1 class="scroll-element">Bienvenue sur mon Portfolio</h1>
+                    <h2 class="scroll-element">Hello, je suis</h2>
+                    <h3 class="scroll-element">Adam<span class="multiple"></span></h3>
+                    <p class="scroll-element">Passionné par le développement web FullStack et les nouvelles technologies</p>
+                    <div class="social-media scroll-element">
+                        <a href="tel:+2250758280357" aria-label="WhatsApp"><i class='bx bxl-whatsapp'></i></a>
+                        <a href="https://www.linkedin.com/in/adam-poussi-66218b9a" target="_blank"><i class="fab fa-linkedin-in"></i></a>
+                        <a href="https://github.com/Rosky07" target="_blank"><i class='bx bxl-github'></i></a>
                     </div>
                 </div>
-                <div class="hero-image scroll-element">
-                    <img src="./assets/ok.JPG" alt="Photo personnelle" class="photo">
-                    <a href="./assets/CV Adam.pdf" download class="btn-cv">Télécharger Mon CV</a>
+                <div class="hero-img scroll-element">
+                    <img src="./assets/ok.JPG" alt="Photo Adam Poussi">
+                    <a href="./assets/CV Adam.pdf" download class="btn-cv scroll-element">Télécharger Mon CV</a>
                 </div>
             </div>
         </section>
 
-
-
-
-        <!-- Compétences -->
-        <section id="competence" class="scroll-section">
-            <h3 class="scroll-element">MES COMPÉTENCES</h3>
-            <div class="comp">
-                <div class="competence-card scroll-element">
+        <section id="competences" class="section scroll-element">
+            <h2 class="scroll-element">Mes Compétences</h2>
+            <div class="cards-grid">
+                <div class="card scroll-element">
                     <i class="fas fa-code"></i>
-                    <h4>Développeur Web</h4>
-                    <p>Passionné par le développement et la création, j'utilise les technologies comme :</p>
-                    <ol>
+                    <h3>Développeur Web</h3>
+                    <ul class="skills-list">
                         <li>HTML</li>
                         <li>CSS</li>
                         <li>JavaScript</li>
                         <li>Intelligence Artificielle</li>
-                    </ol>
-                    <p class="slogan">Pour vous faire des sites web performants et booster ma productivité !</p>
+                    </ul>
+                    <p class="slogan">Sites web performants et productivité boostée</p>
                 </div>
-                <div class="competence-card scroll-element">
+                <div class="card scroll-element">
                     <i class="fa-solid fa-chart-line"></i>
-                    <h4>Data Analyst</h4>
-                    <p>Les données sont omniprésentes dans notre société. Je me lance dans la Data Analysis dans le milieu sanitaire pour apporter de la valeur au système.</p>
-                    <p>Etant un Gestionnaire de Données sanitaire, mes connaissances et compétences en matière d'analyse de données me sont grandement profitables pour mon métier</p>
+                    <h3>Data Analyst</h3>
+                    <p>Analyse de données dans le secteur sanitaire</p>
+                    <p>Gestionnaire de données avec expertise en analyse</p>
                 </div>
-                <div class="competence-card scroll-element">
+                <div class="card scroll-element">
                     <i class="fa-solid fa-database"></i>
-                    <h4>Base de Données</h4>
-                    <p>Maîtrise des SGBD relationnels (MySQL, PostgreSQL) et NoSQL pour gérer efficacement les données structurées et non-structurées.</p>
+                    <h3>Base de Données</h3>
+                    <p>MySQL • PostgreSQL • NoSQL</p>
+                    <p>Gestion efficace des données structurées/non-structurées</p>
                 </div>
-                <div class="competence-card scroll-element">
+                <div class="card scroll-element">
                     <i class="fa-solid fa-server"></i>
-                    <h4>Backend</h4>
-                    <p>Développement d'APIs robustes avec Node.js, Express et intégration de services cloud pour des applications scalables.</p>
+                    <h3>Backend</h3>
+                    <p>Node.js • Express • APIs scalables</p>
+                    <p>Intégration services cloud</p>
                 </div>
             </div>
         </section>
 
-        <!-- Formations -->
-        <section id="formations" class="scroll-section">
-            <h3 class="scroll-element">MES FORMATIONS</h3>
-            <div class="forma">
-                <div class="projet scroll-element">
+        <section id="formations" class="section scroll-element">
+            <h2 class="scroll-element">Mes Formations</h2>
+            <div class="cards-grid">
+                <div class="card scroll-element">
                     <i class="fa-solid fa-user-graduate"></i>
-                    <h4>Formations sur le DHIS2</h4>
-                    <p>Formation sur le DHIS2 à Yamoussokro dans le cadre de la surveillance Epidémiologique.</p>
+                    <h3>Formation DHIS2</h3>
+                    <p>Surveillance épidémiologique - Yamoussokro</p>
                 </div>
-                <div class="projet scroll-element">
+                <div class="card scroll-element">
                     <i class="fa-solid fa-laptop"></i>
-                    <h4>Licence Informatique</h4>
-                    <p>Formation complète en développement web, algorithmes et bases de données.</p>
-                    <p>Le reseau Informatique</p>
+                    <h3>Licence Informatique</h3>
+                    <p>Développement web, algorithmes, bases de données</p>
+                    <p>Réseaux informatiques</p>
                 </div>
-                <div class="projet scroll-element">
+                <div class="card scroll-element">
                     <i class="fa-solid fa-certificate"></i>
-                    <h4>BTS EN IDA</h4>
-                    <p>Spécialisation Solutions d'Infrastructure et Réseaux.</p>
+                    <h3>BTS IDA</h3>
+                    <p>Solutions d'Infrastructure et Réseaux</p>
                 </div>
-                <div class="projet scroll-element">
+                <div class="card scroll-element">
                     <i class="fa-solid fa-school"></i>
-                    <h4>Bac Série D</h4>
-                    <p>Spécialité Mathématiques et Sciences.</p>
+                    <h3>Bac Série D</h3>
+                    <p>Spécialité Mathématiques et Sciences</p>
                 </div>
             </div>
         </section>
 
-        <!-- Contact -->
-        <section id="contact" class="scroll-section">
-            <h3 class="scroll-element">NOUS CONTACTER</h3>
-            <form class="scroll-element">
-                <div class="form-group">
+        <section id="contact" class="section scroll-element">
+            <h2 class="scroll-element">Contactez-moi</h2>
+            <form class="contact-form scroll-element">
+                <div class="form-group scroll-element">
                     <label for="name">Nom :</label>
                     <input type="text" id="name" name="name" required>
                 </div>
-                <div class="form-group">
+                <div class="form-group scroll-element">
                     <label for="email">Email :</label>
                     <input type="email" id="email" name="email" required>
                 </div>
-                <button type="submit">Envoyer <i class="fa-solid fa-paper-plane"></i></button>
+                <div class="form-group scroll-element">
+                    <label for="message">Message :</label>
+                    <textarea id="message" name="message" rows="5" required></textarea>
+                </div>
+                <button type="submit" class="btn-submit scroll-element">
+                    Envoyer <i class="fa-solid fa-paper-plane"></i>
+                </button>
             </form>
         </section>
     </main>
 
-    <!-- Footer -->
-    <footer class="footer scroll-section">
+    <footer class="scroll-element">
         <div class="footer-content">
             <div class="footer-section scroll-element">
                 <h4>Adam Poussi</h4>
                 <p>Développeur FullStack passionné</p>
                 <div class="contact-info">
-                    <p><i class="fa-solid fa-phone"></i> 07 58 28 03 57</p>
-                    <p><i class="fa-solid fa-phone"></i> 05 04 27 32 12</p>
+                    <p><i class="fa-solid fa-phone"></i> +225 07 58 28 03 57</p>
+                    <p><i class="fa-solid fa-phone"></i> +225 05 04 27 32 12</p>
                 </div>
             </div>
-            
             <div class="footer-section scroll-element">
                 <h4>Liens Rapides</h4>
                 <ul>
                     <li><a href="#accueil">Accueil</a></li>
-                    <li><a href="#competence">Compétences</a></li>
+                    <li><a href="#competences">Compétences</a></li>
                     <li><a href="#formations">Formations</a></li>
                     <li><a href="#contact">Contact</a></li>
                 </ul>
             </div>
-            
             <div class="footer-section scroll-element">
                 <h4>Réseaux Sociaux</h4>
                 <div class="social-media">
-                    <a href="https://wa.me/+2250758280357" target="_blank" aria-label="WhatsApp" title="WhatsApp">
-                        <i class="fa-brands fa-whatsapp"></i>
-                    </a>
-                    <a href="https://www.linkedin.com/in/adam-poussi-66218b9a" target="_blank" aria-label="LinkedIn" title="LinkedIn">
-                        <i class="fa-brands fa-linkedin-in"></i>
-                    </a>
-                    <a href="https://github.com/Rosky07" target="_blank" aria-label="GitHub" title="GitHub">
-                        <i class="fa-brands fa-github"></i>
-                    </a>
+                    <a href="https://wa.me/+2250758280357" target="_blank" aria-label="WhatsApp"><i class="fa-brands fa-whatsapp"></i></a>
+                    <a href="https://www.linkedin.com/in/adam-poussi-66218b9a" target="_blank" aria-label="LinkedIn"><i class="fa-brands fa-linkedin-in"></i></a>
+                    <a href="https://github.com/Rosky07" target="_blank" aria-label="GitHub"><i class="fa-brands fa-github"></i></a>
                 </div>
-                <p class="copyright">&copy; 2025 Mon Portfolio. Tous droits réservés.</p>
+                <p class="copyright">&copy; 2025 Adam Poussi. Tous droits réservés.</p>
             </div>
         </div>
-        
         <div class="footer-bottom scroll-element">
-            <p>Développé avec ❤️ par Poussi Adam</p>
+            <p>Développé avec ❤️ par Adam Poussi</p>
         </div>
     </footer>
-<script src="https://cdn.jsdelivr.net/npm/typed.js@2.0.12"></script>
-<script src="script.js"></script>
 
-    <script src="app.js"></script>
+    <script src="script.js"></script>
 </body>
 </html>
