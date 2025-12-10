@@ -3,131 +3,137 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="icon" type="image/png" href="./assets/logo1.PNG">
-   
-    <!-- Google Font: Poppins -->
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-   
-    <!-- Font Awesome 6.5.1 -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"/>
-   
-    <!-- Boxicons CSS -->
-    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
-
-    <!-- CSS Principal -->
-    <link rel="stylesheet" href="style.css">
+    <meta name="description" content="Portfolio professionnel d'Adam Poussi - Développeur Web Full Stack et Data Analyst">
+    <title>Adam Poussi - Portfolio Développeur Web & Data</title>
     
-    <title>MON PORTFOLIO</title>
+    <!-- Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- Typed.js -->
+    <script src="https://cdn.jsdelivr.net/npm/typed.js@2.0.12"></script>
+    
+    <!-- CSS -->
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <!-- Header -->
+    <!-- ===== HEADER ===== -->
     <header>
-        <a href="#home" id="logo" aria-label="Retour à l'accueil">
-            <img src="./assets/logo1.PNG" alt="Logo portfolio">
+        <a href="#accueil" id="logo" aria-label="Retour à l'accueil">
+            <img src="./assets/logo1.PNG" alt="Logo Adam Poussi">
         </a>
-        <nav>
+        
+        <nav id="navbar">
             <ul>
-                <li><a href="#home">Accueil</a></li>
-                <li><a href="#accueil">À Propos</a></li>
-                <li><a href="#competence">Compétences</a></li>
+                <li><a href="#accueil">Accueil</a></li>
+                <li><a href="#apropos">À Propos</a></li>
+                <li><a href="#experiences">Expériences</a></li>
+                <li><a href="#competences">Compétences</a></li>
                 <li><a href="#formations">Formations</a></li>
                 <li><a href="#contact">Contact</a></li>
             </ul>
         </nav>
+        
+        <button class="menu-toggle" id="menuToggle" aria-label="Menu de navigation" aria-expanded="false">
+            <span></span>
+            <span></span>
+            <span></span>
+        </button>
     </header>
 
     <main>
-        <br>
-        <!-- Section Home -->
-        <section class="home" id="home">
+        <!-- ===== SECTION ACCUEIL ===== -->
+        <section class="home scroll-section" id="accueil">
             <div class="home-content scroll-element">
                 <h1>Bienvenue sur Mon Portfolio</h1>
-                <h2>Hello, je suis</h2>
-                <h3>Adam Poussi</h3>
-                <h3>et je suis <span class="multiple" style="color:rgb(255, 157, 0)"></span></h3>
+                <h2>Hello, je suis <span class="highlight">Adam Poussi</span></h2>
+                <h3>et je suis <span class="multiple" style="color: orange;"></span></h3>
                 <p>Explorez mon univers numérique : un portfolio de développement web où la créativité rencontre la fonctionnalité pour créer des expériences en ligne exceptionnelles.</p>
+                
                 <div class="social-media">
-                    <a target="_blank" href="tel:+2250758280357" aria-label="WhatsApp"><i class='bx bxl-whatsapp'></i></a>
-                    <a href="https://www.linkedin.com/in/adam-poussi-66218b9a" target="_blank" aria-label="LinkedIn"><i class="fa-brands fa-linkedin-in"></i></a>
-                    <a target="_blank" href="https://github.com/Rosky07" aria-label="GitHub"><i class='bx bxl-github'></i></a>
+                    <a href="https://wa.me/+2250758280357" target="_blank" aria-label="WhatsApp"><i class="fab fa-whatsapp"></i></a>
+                    <a href="https://linkedin.com/in/adam-poussi" target="_blank" aria-label="LinkedIn"><i class="fab fa-linkedin"></i></a>
+                    <a href="https://github.com/adampoussi" target="_blank" aria-label="GitHub"><i class="fab fa-github"></i></a>
                 </div>
             </div>
+            
             <div class="home-img scroll-element">
-                <img src="./assets/veste1.JPG" alt="Photo de Adam Poussi">
+                <img src="./assets/veste1.JPG" alt="Photo de profil Adam Poussi">
             </div>
         </section>
 
-        <!-- Hero Section - À Propos -->
-        <section id="accueil" class="hero scroll-section">
+        <!-- ===== SECTION À PROPOS ===== -->
+        <section class="hero scroll-section" id="apropos">
             <div class="hero-content">
                 <div class="text-content scroll-element">
                     <div class="propos">
-                        <h2>À <span>Propos</span></h2>
-                        <p>Développeur web orienté data, je conçois des applications capables de collecter, 
-                            centraliser et transformer les données en informations exploitables. 
-                            Spécialisé dans la gestion, la qualité et l’analyse des données, 
-                            je mets en place des bases de données robustes, des API fiables, 
-                            des automatisations et des tableaux de bord décisionnels. 
-                            Grâce à la combinaison du développement web et du data management, 
-                            j’aide les entreprises à optimiser leurs processus, 
-                            améliorer leur prise de décision et valoriser leurs données comme un véritable actif stratégique..</p>
+                        <h2><span>À Propos</span></h2>
+                        <p>Développeur web orienté data, je conçois des applications capables de collecter, centraliser et transformer les données en informations exploitables. Spécialisé dans la gestion, la qualité et l'analyse des données, je mets en place des bases de données robustes, des API fiables, des automatisations et des tableaux de bord décisionnels.</p>
+                        <p>Grâce à la combinaison du développement web et du data management, j'aide les entreprises à optimiser leurs processus, améliorer leur prise de décision et valoriser leurs données comme un véritable actif stratégique.</p>
+                        <a href="./assets/CV Adam.pdf" class="btn-cv" download aria-label="Télécharger mon CV"><i class="fas fa-download"></i> Télécharger Mon CV</a>
                     </div>
                 </div>
+                
                 <div class="hero-image scroll-element">
-                    <img src="./assets/ok.JPG" alt="Photo personnelle" class="photo">
-                    <a href="./assets/CV Adam.pdf" download class="btn-cv">Télécharger Mon CV</a>
+                    <img src="./assets/adam.JPG" alt="Adam Poussi - Développeur Web" class="photo">
                 </div>
             </div>
         </section>
 
-
-        <!-- Mes expériences Professionnelles -->
-         <section class="experience" id="experience">
-            <div>
-                <h3 class="scroll-element">MES EXPÉRIENCES PROFESSIONNELLES</h3>
-                <div class="experiences">
-                    <div class="experience  scroll-element">
-                        <i class="fa-solid fa-briefcase"></i>
+        <!-- ===== SECTION EXPÉRIENCES ===== -->
+        <section class="experiences scroll-section" id="experiences">
+            <h3 class="section-title scroll-element">MES EXPÉRIENCES PROFESSIONNELLES</h3>
+            
+            <div class="timeline">
+                <div class="timeline-item scroll-element">
+                    <div class="timeline-dot"></div>
+                    <div class="timeline-date">Février 2023 - Présent</div>
+                    <div class="timeline-content">
                         <h4>Gestionnaire de Données Sanitaire</h4>
                         <h5>Ministère de la Santé et de l'Hygiène Publique - Côte d'Ivoire</h5>
-                        <span>Février 2023 - Présent</span>
                         <ul>
-                            <li>Collecte, validation et analyse des données sanitaires pour soutenir la prise de décision.</li>
-                            <li>Collaboration avec les équipes de santé pour améliorer la qualité des données.</li>
-                            <li>Utilisation d'outils de gestion de données pour optimiser les processus.</li>
+                            <li>Collecte, validation et analyse des données sanitaires pour soutenir la prise de décision</li>
+                            <li>Collaboration avec les équipes de santé pour améliorer la qualité des données</li>
+                            <li>Utilisation d'outils de gestion de données (DHIS2) pour la visualisation des données afin de corriger toutes incohérences</li>
                         </ul>
                     </div>
-                <div>
-                <div class="experience scroll-element">
-                        <i class="fa-solid fa-briefcase"></i>
+                </div>
+
+                <div class="timeline-item scroll-element">
+                    <div class="timeline-dot"></div>
+                    <div class="timeline-date">Mars 2018 - Juin 2018</div>
+                    <div class="timeline-content">
                         <h4>Stagiaire en Développement Web</h4>
                         <h5>Panel Consultings - Abidjan, Côte d'Ivoire</h5>
-                        <span>Mars 2018 - Juin 2018 </span>
                         <ul>
-                            <li>Participation au développement de sites web E-Commerce pour la validation du Stage.</li>
-                            <li>Assistance dans la création de bases de données et l'intégration de fonctionnalités backend.</li>
-                            <li>Collaboration avec l'équipe pour améliorer les performances des sites web.</li>
-                        </ul> je suis un jeune developpeur data an Analyst
+                            <li>Participation au développement de sites web E-Commerce pour la validation du stage</li>
+                            <li>Assistance dans la création de bases de données et l'intégration de fonctionnalités backend</li>
+                            <li>Collaboration avec l'équipe pour améliorer les performances des sites web</li>
+                        </ul>
+                    </div>
                 </div>
-                <div class="experience scroll-element">
-                        <i class="fa-solid fa-briefcase"></i>
+
+                <div class="timeline-item scroll-element">
+                    <div class="timeline-dot"></div>
+                    <div class="timeline-date">Mars 2018 - Juin 2018</div>
+                    <div class="timeline-content">
                         <h4>Formateur en Programmation Devkids</h4>
                         <h5>Panel Consultings - Abidjan, Côte d'Ivoire</h5>
-                        <span>Mars 2018 - Juin 2018 </span>
                         <ul>
-                            <li>Initiation des enfants à la programmation via le <span>LOGICIEL SCRATCH !</span></li>
+                            <li>Initiation des enfants à la programmation via le logiciel SCRATCH !</li>
                             <li>Participation à la coordination de projets de développement web</li>
                         </ul>
+                    </div>
                 </div>
+            </div>
+        </section>
 
-         </section>
-
-
-
-
-        <!-- Compétences -->
-        <section id="competence" class="scroll-section">
-            <h3 class="scroll-element">MES COMPÉTENCES</h3>
+        <!-- ===== SECTION COMPÉTENCES ===== -->
+        <section id="competences" class="scroll-section">
+            <h3 class="section-title scroll-element">MES COMPÉTENCES</h3>
+            
             <div class="comp">
                 <div class="competence-card scroll-element">
                     <i class="fas fa-code"></i>
@@ -139,134 +145,235 @@
                         <li>JavaScript</li>
                         <li>Intelligence Artificielle</li>
                     </ul>
-                    <p>Bientôt je m'attaquerais à ReactJs et d'autres Framework FrontEnd</p>
-                    <p class="slogan">Pour vous faire des sites web performants et booster ma productivité !</p>
+                    <p class="slogan">Bientôt je m'attaquerais à ReactJs et d'autres Framework FrontEnd</p>
+                    <p>Pour vous faire des sites web performants et booster ma productivité !</p>
                 </div>
+
                 <div class="competence-card scroll-element">
-                    <i class="fa-solid fa-chart-line"></i>
+                    <i class="fas fa-chart-line"></i>
                     <h4>Data Analyst</h4>
                     <p>Les données sont omniprésentes dans notre société. Je me lance dans la Data Analyst dans le milieu sanitaire pour apporter de la valeur au système de Santé.</p>
                     <p>Etant un Gestionnaire de Données sanitaire, mes connaissances et compétences en matière d'analyse de données me sont grandement profitables pour mon métier, et celà m'aide grandement dans l'accomplissement de mes tâches !</p>
                 </div>
+
                 <div class="competence-card scroll-element">
-                    <i class="fa-solid fa-database"></i>
+                    <i class="fas fa-database"></i>
                     <h4>Base de Données</h4>
                     <p>Maîtrise Partiel des SGBD relationnels (MySQL, MongoDB) et NoSQL pour gérer efficacement les données structurées et non-structurées.</p>
                 </div>
+
                 <div class="competence-card scroll-element">
-                    <i class="fa-solid fa-server"></i>
+                    <i class="fas fa-server"></i>
                     <h4>Backend</h4>
-                    <p>Développement BackEnd, j'utilise MySQL/PHP pour me faire un BackEnd bien structuré et fluide pour mes projets ! </p>
+                    <p>Développement BackEnd, j'utilise MySQL/PHP pour me faire un BackEnd bien structuré et fluide pour mes projets !</p>
+                </div>
+            </div>
+
+            <!-- ===== COMPÉTENCES TECHNIQUES ===== -->
+            <div class="technical-skills scroll-element">
+                <h4 class="subsection-title">Compétences Techniques</h4>
+                
+                <div class="skills-grid">
+                    <div class="skill-item">
+                        <div class="skill-info">
+                            <span class="skill-name">HTML/CSS</span>
+                            <span class="skill-percent">0%</span>
+                        </div>
+                        <div class="skill-bar">
+                            <div class="skill-progress" data-progress="70"></div>
+                        </div>
+                    </div>
+                    <div class="skill-item">
+                        <div class="skill-info">
+                            <span class="skill-name">Bootstrap</span>
+                            <span class="skill-percent">0%</span>
+                        </div>
+                        <div class="skill-bar">
+                            <div class="skill-progress" data-progress="60"></div>
+                        </div>
+                    </div>
+
+                    <div class="skill-item">
+                        <div class="skill-info">
+                            <span class="skill-name">JavaScript</span>
+                            <span class="skill-percent">0%</span>
+                        </div>
+                        <div class="skill-bar">
+                            <div class="skill-progress" data-progress="5"></div>
+                        </div>
+                    </div>
+
+                    <div class="skill-item">
+                        <div class="skill-info">
+                            <span class="skill-name">PHP/MySQL</span>
+                            <span class="skill-percent">0%</span>
+                        </div>
+                        <div class="skill-bar">
+                            <div class="skill-progress" data-progress="60"></div>
+                        </div>
+                    </div>
+
+                    <div class="skill-item">
+                        <div class="skill-info">
+                            <span class="skill-name">Python</span>
+                            <span class="skill-percent">0%</span>
+                        </div>
+                        <div class="skill-bar">
+                            <div class="skill-progress" data-progress="40"></div>
+                        </div>
+                    </div>
+
+                    <div class="skill-item">
+                        <div class="skill-info">
+                            <span class="skill-name">MongoDB</span>
+                            <span class="skill-percent">0%</span>
+                        </div>
+                        <div class="skill-bar">
+                            <div class="skill-progress" data-progress="10"></div>
+                        </div>
+                    </div>
+
+                    <div class="skill-item">
+                        <div class="skill-info">
+                            <span class="skill-name">DHIS2</span>
+                            <span class="skill-percent">0%</span>
+                        </div>
+                        <div class="skill-bar">
+                            <div class="skill-progress" data-progress="85"></div>
+                        </div>
+                    </div>
+
+                    <div class="skill-item">
+                        <div class="skill-info">
+                            <span class="skill-name">Git/GitHub</span>
+                            <span class="skill-percent">0%</span>
+                        </div>
+                        <div class="skill-bar">
+                            <div class="skill-progress" data-progress="30"></div>
+                        </div>
+                    </div>
+
+                    <div class="skill-item">
+                        <div class="skill-info">
+                            <span class="skill-name">Data Analysis</span>
+                            <span class="skill-percent">0%</span>
+                        </div>
+                        <div class="skill-bar">
+                            <div class="skill-progress" data-progress="60"></div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </section>
 
-        <!-- Formations -->
+        <!-- ===== SECTION FORMATIONS ===== -->
         <section id="formations" class="scroll-section">
-            <h3 class="scroll-element">MES FORMATIONS</h3>
+            <h3 class="section-title scroll-element">MES FORMATIONS</h3>
+            
             <div class="forma">
                 <div class="projet scroll-element">
-                    <i class="fa-solid fa-user-graduate"></i>
-                    <h5>Décembre 2023</h5>
-                    <h4>Formations sur le DHIS2</h4>
+                    <i class="fas fa-graduation-cap"></i>
+                    <h4>Décembre 2023</h4>
+                    <h5>Formations sur le DHIS2</h5>
                     <p>Formation sur le DHIS2 à Yamoussokro dans le cadre de la surveillance Epidémiologique.</p>
                 </div>
+
                 <div class="projet scroll-element">
-                    <i class="fa-solid fa-laptop"></i>
-                    <h5>2020</h5>
-                    <h4>Licence Informatique à ITES II Plateaux Abidjan</h4>
-                    <p>Formation en développement web, bases de données, réseau Informatique, afin d'être prêt pour le marché de l'Emploi .</p>
-                    <p>Le reseau Informatique</p>
+                    <i class="fas fa-laptop-code"></i>
+                    <h4>2020</h4>
+                    <h5>Licence Informatique à ITES II Plateaux Abidjan</h5>
+                    <p>Formation en développement web, bases de données, réseau Informatique, afin d'être prêt pour le marché de l'Emploi.</p>
                 </div>
+
                 <div class="projet scroll-element">
-                    <i class="fa-solid fa-certificate"></i>
-                    <h5>2017</h5>
-                    <h4>BTS EN IDA à IST Saint Jacques de Bouaké</h4>
+                    <i class="fas fa-database"></i>
+                    <h4>2017</h4>
+                    <h5>BTS EN IDA à IST Saint Jacques de Bouaké</h5>
                     <p>Formé sur les Bases de Données relationlle (NoSQL), le Html, CSS.</p>
                 </div>
+
                 <div class="projet scroll-element">
-                    <i class="fa-solid fa-school"></i>
-                    <h5>2014</h5>
-                    <h4>Baccalauréat</h4>
-                    <p>Obtention du Baccalauréat en Série D au Lycée Moderne de Tengrela!.</p>
+                    <i class="fas fa-school"></i>
+                    <h4>2014</h4>
+                    <h5>Baccalauréat</h5>
+                    <p>Obtention du Baccalauréat en Série D au Lycée Moderne de Tengrela!</p>
                 </div>
             </div>
         </section>
 
-        <!-- Contact -->
+        <!-- ===== SECTION CONTACT ===== -->
         <section id="contact" class="scroll-section">
-            <h3 class="scroll-element">NOUS CONTACTER</h3>
-            <form class="scroll-element" id="contactForm">
-                <div class="form-group">
-                    <label for="name">Nom :</label>
-                    <input type="text" id="name" name="name" required>
+            <h3 class="section-title scroll-element">NOUS CONTACTER</h3>
+            
+            <form id="contactForm" class="scroll-element">
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="nom">Nom :</label>
+                        <input type="text" id="nom" name="nom" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="prenom">Prénom :</label>
+                        <input type="text" id="prenom" name="prenom" required>
+                    </div>
                 </div>
-                <div class="form-group">
-                    <label for="prenom">Prénom :</label>
-                    <input type="text" id="prenom" name="prenom" required>
-                </div>
+                
                 <div class="form-group">
                     <label for="email">Email :</label>
                     <input type="email" id="email" name="email" required>
                 </div>
+                
                 <div class="form-group">
                     <label for="message">Message :</label>
-                    <textarea id="message" name="message" required></textarea>
+                    <textarea id="message" name="message" rows="5" required></textarea>
                 </div>
-                <button type="submit">Envoyer <i class="fa-solid fa-paper-plane"></i></button>
+                
+                <button type="submit" class="btn-submit">
+                    <i class="fas fa-paper-plane"></i> Envoyer
+                </button>
             </form>
         </section>
     </main>
 
-    <!-- Footer -->
-    <footer class="footer scroll-section">
+    <!-- ===== FOOTER ===== -->
+    <footer class="footer">
         <div class="footer-content">
-            <div class="footer-section scroll-element">
+            <div class="footer-section">
                 <h4>Adam Poussi</h4>
                 <p>Développeur FullStack passionné</p>
-                <div class="contact-info">
-                    <p><i class="fa-solid fa-phone"></i> 07 58 28 03 57</p>
-                    <p><i class="fa-solid fa-phone"></i> 05 04 27 32 12</p>
+                <div class="social-media">
+                    <a href="https://wa.me/+2250758280357" target="_blank" aria-label="WhatsApp"><i class="fab fa-whatsapp"></i></a>
+                    <a href="https://linkedin.com/in/adam-poussi" target="_blank" aria-label="LinkedIn"><i class="fab fa-linkedin"></i></a>
+                    <a href="https://github.com/adampoussi" target="_blank" aria-label="GitHub"><i class="fab fa-github"></i></a>
                 </div>
             </div>
-           
-            <div class="footer-section scroll-element">
+
+            <div class="footer-section contact-info">
+                <h4>Contact</h4>
+                <p><i class="fas fa-phone"></i> 07 58 28 03 57</p>
+                <p><i class="fas fa-phone"></i> 05 04 27 32 12</p>
+                <p><i class="fas fa-envelope"></i> roskyadam7@gmail.com</p>
+            </div>
+
+            <div class="footer-section">
                 <h4>Liens Rapides</h4>
                 <ul>
-                    <li><a href="#home">Accueil</a></li>
-                    <li><a href="#accueil">À Propos</a></li>
-                    <li><a href="#competence">Compétences</a></li>
+                    <li><a href="#accueil">Accueil</a></li>
+                    <li><a href="#apropos">À Propos</a></li>
+                    <li><a href="#competences">Compétences</a></li>
                     <li><a href="#formations">Formations</a></li>
                     <li><a href="#contact">Contact</a></li>
                 </ul>
             </div>
-           
-            <div class="footer-section scroll-element">
-                <h4>Réseaux Sociaux</h4>
-                <div class="social-media">
-                    <a href="https://wa.me/+2250758280357" target="_blank" aria-label="WhatsApp" title="WhatsApp">
-                        <i class="fa-brands fa-whatsapp"></i>
-                    </a>
-                    <a href="https://www.linkedin.com/in/adam-poussi-66218b9a" target="_blank" aria-label="LinkedIn" title="LinkedIn">
-                        <i class="fa-brands fa-linkedin-in"></i>
-                    </a>
-                    <a href="https://github.com/Rosky07" target="_blank" aria-label="GitHub" title="GitHub">
-                        <i class="fa-brands fa-github"></i>
-                    </a>
-                </div>
-                <p class="copyright">&copy; 2025 Mon Portfolio. Tous droits réservés.</p>
-            </div>
         </div>
-       
-        <div class="footer-bottom scroll-element">
+
+        <div class="footer-bottom">
+            <p>© 2025 Mon Portfolio. Tous droits réservés.</p>
             <p>Développé avec ❤️ par Poussi Adam</p>
         </div>
     </footer>
 
-    <!-- Typed.js pour l'animation du texte -->
-    <script src="https://cdn.jsdelivr.net/npm/typed.js@2.0.12"></script>
-    
-    <!-- Script JavaScript Principal -->
+    <!-- JavaScript -->
     <script src="app.js"></script>
 </body>
 </html>

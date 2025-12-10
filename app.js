@@ -1,284 +1,25 @@
 /* =====================================================
    PORTFOLIO - APP.JS
-   Fichier JavaScript principal avec animations scroll
+   Version Professionnelle Optimisée
    ===================================================== */
 
-// =====================================================
-// 1. ANIMATION TYPED.JS POUR LE TEXTE DYNAMIQUE
-// =====================================================
-document.addEventListener('DOMContentLoaded', function() {
-    // Initialisation de Typed.js pour animer le texte
-    const typed = new Typed('.multiple', {
-        strings: [
-            'Développeur Web',
-            'Gestionnaire de Données',
-            'Data Analyst',
-        ],
-        typeSpeed: 80,
-        backSpeed: 80,
-        backDelay: 1200,
-        loop: true
-    });
-});
+'use strict';
 
-// =====================================================
-// 2. ANIMATIONS AU SCROLL - INTERSECTION OBSERVER
-// =====================================================
-const observerOptions = {
-    threshold: 0.1,
-    rootMargin: '0px 0px -50px 0px'
+// ===== CONFIGURATION =====
+const CONFIG = {
+    headerOffset: 80,
+    scrollDebounceDelay: 15,
+    observerThreshold: 0.1,
+    observerRootMargin: '0px 0px -50px 0px',
+    notificationDuration: 3000
 };
 
-// Callback pour l'intersection observer
-const observerCallback = (entries, observer) => {
-    entries.forEach(entry => {
-        if (entry.isIntersecting) {
-            entry.target.classList.add('scrolled');
-            // Une fois animé, on arrête d'observer cet élément
-            observer.unobserve(entry.target);
-        }
-    });
-};
-
-// Création de l'observer
-const observer = new IntersectionObserver(observerCallback, observerOptions);
-
-// Observer tous les éléments avec la classe scroll-element
-const scrollElements = document.querySelectorAll('.scroll-element');
-scrollElements.forEach(el => observer.observe(el));
-
-// =====================================================
-// 3. SMOOTH SCROLL POUR LA NAVIGATION
-// =====================================================
-document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-    anchor.addEventListener('click', function (e) {
-        e.preventDefault();
-        const targetId = this.getAttribute('href');
-        
-        if (targetId === '#') return;
-        
-        const targetElement = document.querySelector(targetId);
-        if (targetElement) {
-            const headerOffset = 80;
-            const elementPosition = targetElement.getBoundingClientRect().top;
-            const offsetPosition = elementPosition + window.pageYOffset - headerOffset;
-
-            window.scrollTo({
-                top: offsetPosition,
-                behavior: 'smooth'
-            });
-        }
-    });
-});
-
-// =====================================================
-// 4. HEADER ACTIF AU SCROLL
-// =====================================================
-const header = document.querySelector('header');
-const sections = document.querySelectorAll('section[id]');
-const navLinks = document.querySelectorAll('nav a');
-
-// Fonction pour mettre à jour le lien actif
-function updateActiveLink() {
-    const scrollY = window.pageYOffset;
-
-    sections.forEach(section => {
-        const sectionHeight = section.offsetHeight;
-        const sectionTop = section.offsetTop - 100;
-        const sectionId = section.getAttribute('id');
-        const correspondingLink = document.querySelector(`nav a[href="#${sectionId}"]`);
-
-        if (scrollY > sectionTop && scrollY <= sectionTop + sectionHeight) {
-            navLinks.forEach(link => link.classList.remove('active'));
-            if (correspondingLink) {
-                correspondingLink.classList.add('active');
-            }
-        }
-    });
-
-    // Ajouter une ombre au header lors du scroll
-    if (scrollY > 50) {
-        header.classList.add('scrolled');
-    } else {
-        header.classList.remove('scrolled');
-    }
-}
-
-window.addEventListener('scroll', updateActiveLink);
-
-// =====================================================
-// 5. GESTION DU FORMULAIRE DE CONTACT
-// =====================================================
-const contactForm = document.getElementById('contactForm');
-
-if (contactForm) {
-    contactForm.addEventListener('submit', function(e) {
-        e.preventDefault();
-        
-        const name = document.getElementById('name').value;
-        const email = document.getElementById('email').value;
-        
-        if (name && email) {
-            // Simulation d'envoi (à remplacer par votre logique d'envoi)
-            showNotification('Message envoyé avec succès ! 🎉', 'success');
-            
-            // Réinitialiser le formulaire
-            contactForm.reset();
-            
-            // Dans un cas réel, vous enverriez les données à un serveur :
-            // fetch('/api/contact', {
-            //     method: 'POST',
-            //     headers: { 'Content-Type': 'application/json' },
-            //     body: JSON.stringify({ name, email })
-            // });
-        } else {
-            showNotification('Veuillez remplir tous les champs', 'error');
-        }
-    });
-}
-
-// =====================================================
-// 6. SYSTÈME DE NOTIFICATION
-// =====================================================
-function showNotification(message, type = 'success') {
-    // Créer l'élément de notification
-    const notification = document.createElement('div');
-    notification.className = `notification ${type}`;
-    notification.textContent = message;
-    
-    // Styles inline pour la notification
-    notification.style.cssText = `
-        position: fixed;
-        top: 100px;
-        right: 20px;
-        background: ${type === 'success' ? 'linear-gradient(135deg, #27ae60, #2ecc71)' : 'linear-gradient(135deg, #e74c3c, #c0392b)'};
-        color: white;
-        padding: 1rem 2rem;
-        border-radius: 12px;
-        box-shadow: 0 10px 30px rgba(0,0,0,0.3);
-        z-index: 10000;
-        animation: slideIn 0.5s ease;
-        font-weight: 500;
-    `;
-    
-    document.body.appendChild(notification);
-    
-    // Retirer la notification après 3 secondes
-    setTimeout(() => {
-        notification.style.animation = 'slideOut 0.5s ease';
-        setTimeout(() => notification.remove(), 500);
-    }, 3000);
-}
-
-// Ajouter les animations CSS pour les notifications
-const style = document.createElement('style');
-style.textContent = `
-    @keyframes slideIn {
-        from {
-            transform: translateX(400px);
-            opacity: 0;
-        }
-        to {
-            transform: translateX(0);
-            opacity: 1;
-        }
-    }
-    
-    @keyframes slideOut {
-        from {
-            transform: translateX(0);
-            opacity: 1;
-        }
-        to {
-            transform: translateX(400px);
-            opacity: 0;
-        }
-    }
-    
-    nav a.active {
-        color: #ff8800;
-    }
-    
-    nav a.active::after {
-        width: 100%;
-    }
-    
-    header.scrolled {
-        box-shadow: 0 4px 30px rgba(255, 136, 0, 0.3);
-    }
-`;
-document.head.appendChild(style);
-
-// =====================================================
-// 7. ANIMATION DES CARTES AU HOVER
-// =====================================================
-const cards = document.querySelectorAll('.competence-card, .projet');
-
-cards.forEach(card => {
-    card.addEventListener('mouseenter', function() {
-        this.style.transform = 'translateY(-15px) scale(1.02)';
-    });
-    
-    card.addEventListener('mouseleave', function() {
-        this.style.transform = 'translateY(0) scale(1)';
-    });
-});
-
-// =====================================================
-// 8. COMPTEUR D'ANIMATIONS (OPTIONNEL)
-// =====================================================
-function animateValue(element, start, end, duration) {
-    let startTimestamp = null;
-    const step = (timestamp) => {
-        if (!startTimestamp) startTimestamp = timestamp;
-        const progress = Math.min((timestamp - startTimestamp) / duration, 1);
-        element.textContent = Math.floor(progress * (end - start) + start);
-        if (progress < 1) {
-            window.requestAnimationFrame(step);
-        }
-    };
-    window.requestAnimationFrame(step);
-}
-
-// =====================================================
-// 9. LAZY LOADING DES IMAGES
-// =====================================================
-if ('loading' in HTMLImageElement.prototype) {
-    const images = document.querySelectorAll('img[loading="lazy"]');
-    images.forEach(img => {
-        img.src = img.dataset.src;
-    });
-} else {
-    // Fallback pour les navigateurs qui ne supportent pas le lazy loading
-    const script = document.createElement('script');
-    script.src = 'https://cdnjs.cloudflare.com/ajax/libs/lazysizes/5.3.2/lazysizes.min.js';
-    document.body.appendChild(script);
-}
-
-// =====================================================
-// 10. DÉTECTION DU MODE SOMBRE (OPTIONNEL)
-// =====================================================
-const prefersDarkScheme = window.matchMedia('(prefers-color-scheme: dark)');
-
-function detectColorScheme() {
-    if (prefersDarkScheme.matches) {
-        document.body.classList.add('dark-mode');
-    } else {
-        document.body.classList.remove('dark-mode');
-    }
-}
-
-// Détecter le changement de préférence
-prefersDarkScheme.addEventListener('change', detectColorScheme);
-
-// =====================================================
-// 11. PERFORMANCE - DEBOUNCE POUR LE SCROLL
-// =====================================================
-function debounce(func, wait = 10, immediate = true) {
+// ===== UTILITAIRES =====
+const debounce = (func, wait = 10, immediate = true) => {
     let timeout;
-    return function() {
-        const context = this, args = arguments;
-        const later = function() {
+    return function executedFunction(...args) {
+        const context = this;
+        const later = () => {
             timeout = null;
             if (!immediate) func.apply(context, args);
         };
@@ -287,49 +28,488 @@ function debounce(func, wait = 10, immediate = true) {
         timeout = setTimeout(later, wait);
         if (callNow) func.apply(context, args);
     };
+};
+
+// ===== GESTION DU MENU MOBILE =====
+class MobileMenu {
+    constructor() {
+        this.menuToggle = document.getElementById('menuToggle');
+        this.navbar = document.getElementById('navbar');
+        this.navLinks = document.querySelectorAll('nav a');
+        this.init();
+    }
+
+    init() {
+        if (!this.menuToggle || !this.navbar) return;
+
+        this.menuToggle.addEventListener('click', () => this.toggle());
+        
+        this.navLinks.forEach(link => {
+            link.addEventListener('click', () => this.close());
+        });
+
+        // Fermer le menu en cliquant en dehors
+        document.addEventListener('click', (e) => {
+            if (!this.navbar.contains(e.target) && !this.menuToggle.contains(e.target)) {
+                this.close();
+            }
+        });
+    }
+
+    toggle() {
+        const isActive = this.navbar.classList.toggle('active');
+        this.menuToggle.classList.toggle('active');
+        this.menuToggle.setAttribute('aria-expanded', isActive);
+        document.body.style.overflow = isActive ? 'hidden' : '';
+    }
+
+    close() {
+        this.navbar.classList.remove('active');
+        this.menuToggle.classList.remove('active');
+        this.menuToggle.setAttribute('aria-expanded', 'false');
+        document.body.style.overflow = '';
+    }
 }
 
-// Optimiser l'event scroll avec debounce
-window.addEventListener('scroll', debounce(updateActiveLink, 15));
+// ===== ANIMATIONS TYPED.JS =====
+class TypedAnimations {
+    constructor() {
+        this.init();
+    }
 
-// =====================================================
-// 12. CONSOLE MESSAGE
-// =====================================================
-console.log('%c👋 Bienvenue sur mon Portfolio!', 'color: #ff8800; font-size: 20px; font-weight: bold;');
-console.log('%c🚀 Développé avec passion par Adam Poussi', 'color: #27ae60; font-size: 14px;');
-console.log('%c💼 Contactez-moi pour vos projets web!', 'color: #3498db; font-size: 14px;');
+    init() {
+        if (typeof Typed === 'undefined') {
+            console.warn('Typed.js not loaded');
+            return;
+        }
 
-// =====================================================
-// 13. MESSAGE DE CHARGEMENT COMPLET
-// =====================================================
-window.addEventListener('load', function() {
-    console.log('✅ Portfolio chargé avec succès!');
-    
-    // Animation d'apparition initiale
-    document.body.style.opacity = '0';
-    setTimeout(() => {
-        document.body.style.transition = 'opacity 0.5s ease';
-        document.body.style.opacity = '1';
-    }, 100);
+        const element = document.querySelector('.multiple');
+        if (!element) return;
+
+        new Typed('.multiple', {
+            strings: [
+                'Développeur Web',
+                'Gestionnaire de Données',
+                'Data Analyst',
+                'Full Stack Developer'
+            ],
+            typeSpeed: 80,
+            backSpeed: 80,
+            backDelay: 1200,
+            loop: true,
+            showCursor: true,
+            cursorChar: '|'
+        });
+    }
+}
+
+// ===== SCROLL ANIMATIONS =====
+class ScrollAnimations {
+    constructor() {
+        this.observerOptions = {
+            threshold: CONFIG.observerThreshold,
+            rootMargin: CONFIG.observerRootMargin
+        };
+        this.init();
+    }
+
+    init() {
+        const observer = new IntersectionObserver(
+            this.handleIntersection.bind(this),
+            this.observerOptions
+        );
+
+        const elements = document.querySelectorAll('.scroll-element');
+        elements.forEach(el => observer.observe(el));
+    }
+
+    handleIntersection(entries, observer) {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.classList.add('scrolled');
+                observer.unobserve(entry.target);
+            }
+        });
+    }
+}
+
+// ===== NAVIGATION ACTIVE =====
+class ActiveNavigation {
+    constructor() {
+        this.header = document.querySelector('header');
+        this.sections = document.querySelectorAll('section[id]');
+        this.navLinks = document.querySelectorAll('nav a');
+        this.init();
+    }
+
+    init() {
+        window.addEventListener('scroll', debounce(
+            this.updateActiveLink.bind(this),
+            CONFIG.scrollDebounceDelay
+        ));
+    }
+
+    updateActiveLink() {
+        const scrollY = window.pageYOffset;
+
+        // Header shadow
+        if (scrollY > 50) {
+            this.header.classList.add('scrolled');
+        } else {
+            this.header.classList.remove('scrolled');
+        }
+
+        // Active link
+        this.sections.forEach(section => {
+            const sectionHeight = section.offsetHeight;
+            const sectionTop = section.offsetTop - 100;
+            const sectionId = section.getAttribute('id');
+            const correspondingLink = document.querySelector(`nav a[href="#${sectionId}"]`);
+
+            if (scrollY > sectionTop && scrollY <= sectionTop + sectionHeight) {
+                this.navLinks.forEach(link => link.classList.remove('active'));
+                if (correspondingLink) {
+                    correspondingLink.classList.add('active');
+                }
+            }
+        });
+    }
+}
+
+// ===== SMOOTH SCROLL =====
+class SmoothScroll {
+    constructor() {
+        this.init();
+    }
+
+    init() {
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', (e) => {
+                e.preventDefault();
+                const targetId = anchor.getAttribute('href');
+                
+                if (targetId === '#') return;
+
+                const targetElement = document.querySelector(targetId);
+                if (!targetElement) return;
+
+                const elementPosition = targetElement.getBoundingClientRect().top;
+                const offsetPosition = elementPosition + window.pageYOffset - CONFIG.headerOffset;
+
+                window.scrollTo({
+                    top: offsetPosition,
+                    behavior: 'smooth'
+                });
+            });
+        });
+    }
+}
+
+// ===== BARRES DE PROGRESSION =====
+class SkillProgressBars {
+    constructor() {
+        this.skillBars = document.querySelectorAll('.skill-progress');
+        this.skillItems = document.querySelectorAll('.skill-item');
+        this.animated = false;
+        this.init();
+    }
+
+    init() {
+        const observer = new IntersectionObserver(
+            (entries) => this.handleIntersection(entries),
+            { threshold: 0.3 }
+        );
+
+        const skillsSection = document.querySelector('.technical-skills');
+        if (skillsSection) {
+            observer.observe(skillsSection);
+        }
+    }
+
+    handleIntersection(entries) {
+        entries.forEach(entry => {
+            if (entry.isIntersecting && !this.animated) {
+                this.animateBars();
+                this.animated = true;
+            }
+        });
+    }
+
+    animateBars() {
+        this.skillItems.forEach((item, index) => {
+            setTimeout(() => {
+                const bar = item.querySelector('.skill-progress');
+                const percentSpan = item.querySelector('.skill-percent');
+                const targetProgress = parseInt(bar.getAttribute('data-progress'));
+                
+                // Animation synchronisée barre + pourcentage
+                this.animateSkill(bar, percentSpan, targetProgress);
+            }, index * 400); // Délai entre chaque compétence (400ms)
+        });
+    }
+
+    animateSkill(bar, percentSpan, target) {
+        let current = 0;
+        const duration = 2500; // 2.5 secondes par barre
+        const startTime = Date.now();
+        
+        const animate = () => {
+            const elapsed = Date.now() - startTime;
+            const progress = Math.min(elapsed / duration, 1);
+            
+            // Fonction easing ease-out pour ralentir progressivement
+            const easeOut = 1 - Math.pow(1 - progress, 3);
+            current = easeOut * target;
+            
+            // Mettre à jour la barre ET le pourcentage en même temps
+            bar.style.width = current + '%';
+            percentSpan.textContent = Math.round(current) + '%';
+            
+            if (progress < 1) {
+                requestAnimationFrame(animate);
+            } else {
+                // S'assurer que les valeurs finales sont exactes
+                bar.style.width = target + '%';
+                percentSpan.textContent = target + '%';
+            }
+        };
+        
+        requestAnimationFrame(animate);
+    }
+}
+
+// ===== SYSTÈME DE NOTIFICATION =====
+class NotificationSystem {
+    constructor() {
+        this.createStyles();
+    }
+
+    createStyles() {
+        const style = document.createElement('style');
+        style.textContent = `
+            .notification {
+                position: fixed;
+                top: 100px;
+                right: 20px;
+                padding: 1rem 2rem;
+                border-radius: 12px;
+                box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+                z-index: 10000;
+                animation: slideIn 0.5s ease;
+                font-weight: 500;
+                color: white;
+            }
+            
+            .notification.success {
+                background: linear-gradient(135deg, #27ae60, #2ecc71);
+            }
+            
+            .notification.error {
+                background: linear-gradient(135deg, #e74c3c, #c0392b);
+            }
+            
+            @keyframes slideIn {
+                from { transform: translateX(400px); opacity: 0; }
+                to { transform: translateX(0); opacity: 1; }
+            }
+            
+            @keyframes slideOut {
+                from { transform: translateX(0); opacity: 1; }
+                to { transform: translateX(400px); opacity: 0; }
+            }
+        `;
+        document.head.appendChild(style);
+    }
+
+    show(message, type = 'success') {
+        const notification = document.createElement('div');
+        notification.className = `notification ${type}`;
+        notification.textContent = message;
+
+        document.body.appendChild(notification);
+
+        setTimeout(() => {
+            notification.style.animation = 'slideOut 0.5s ease';
+            setTimeout(() => notification.remove(), 500);
+        }, CONFIG.notificationDuration);
+    }
+}
+
+// ===== FORMULAIRE DE CONTACT =====
+class ContactForm {
+    constructor() {
+        this.form = document.getElementById('contactForm');
+        this.notification = new NotificationSystem();
+        this.init();
+    }
+
+    init() {
+        if (!this.form) return;
+
+        this.form.addEventListener('submit', (e) => this.handleSubmit(e));
+    }
+
+    handleSubmit(e) {
+        e.preventDefault();
+
+        const formData = {
+            nom: document.getElementById('nom').value.trim(),
+            prenom: document.getElementById('prenom').value.trim(),
+            email: document.getElementById('email').value.trim(),
+            message: document.getElementById('message').value.trim()
+        };
+
+        if (!this.validateForm(formData)) {
+            this.notification.show('Veuillez remplir tous les champs correctement', 'error');
+            return;
+        }
+
+        this.sendEmail(formData);
+    }
+
+    validateForm(data) {
+        if (!data.nom || !data.prenom || !data.email || !data.message) {
+            return false;
+        }
+
+        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        if (!emailRegex.test(data.email)) {
+            this.notification.show('Email invalide', 'error');
+            return false;
+        }
+
+        return true;
+    }
+
+    sendEmail(data) {
+        const sujet = encodeURIComponent(`Contact de ${data.prenom} ${data.nom}`);
+        const corps = encodeURIComponent(
+            `Nom: ${data.nom}\n` +
+            `Prénom: ${data.prenom}\n` +
+            `Email: ${data.email}\n\n` +
+            `Message:\n${data.message}`
+        );
+
+        window.location.href = `mailto:roskyadam7@gmail.com?subject=${sujet}&body=${corps}`;
+        
+        this.notification.show('Message envoyé avec succès ! 🎉', 'success');
+        this.form.reset();
+    }
+}
+
+// ===== ANIMATIONS DES CARTES =====
+class CardAnimations {
+    constructor() {
+        this.init();
+    }
+
+    init() {
+        const cards = document.querySelectorAll('.competence-card, .projet, .timeline-content');
+        
+        cards.forEach(card => {
+            card.addEventListener('mouseenter', function() {
+                this.style.transition = 'all 0.3s ease';
+            });
+        });
+    }
+}
+
+// ===== LAZY LOADING DES IMAGES =====
+class LazyLoadImages {
+    constructor() {
+        this.init();
+    }
+
+    init() {
+        if ('loading' in HTMLImageElement.prototype) {
+            const images = document.querySelectorAll('img[loading="lazy"]');
+            images.forEach(img => {
+                if (img.dataset.src) {
+                    img.src = img.dataset.src;
+                }
+            });
+        } else {
+            // Fallback pour les anciens navigateurs
+            const script = document.createElement('script');
+            script.src = 'https://cdnjs.cloudflare.com/ajax/libs/lazysizes/5.3.2/lazysizes.min.js';
+            document.body.appendChild(script);
+        }
+    }
+}
+
+// ===== INITIALISATION =====
+class Portfolio {
+    constructor() {
+        this.init();
+    }
+
+    init() {
+        // Attendre que le DOM soit chargé
+        if (document.readyState === 'loading') {
+            document.addEventListener('DOMContentLoaded', () => this.initializeComponents());
+        } else {
+            this.initializeComponents();
+        }
+    }
+
+    initializeComponents() {
+        // Initialiser tous les composants
+        new MobileMenu();
+        new TypedAnimations();
+        new ScrollAnimations();
+        new ActiveNavigation();
+        new SmoothScroll();
+        new SkillProgressBars();
+        new ContactForm();
+        new CardAnimations();
+        new LazyLoadImages();
+
+        // Animation d'apparition initiale
+        this.fadeInBody();
+
+        // Messages console
+        this.consoleMessages();
+
+        console.log('✅ Portfolio initialisé avec succès!');
+    }
+
+    fadeInBody() {
+        document.body.style.opacity = '0';
+        setTimeout(() => {
+            document.body.style.transition = 'opacity 0.5s ease';
+            document.body.style.opacity = '1';
+        }, 100);
+    }
+
+    consoleMessages() {
+        console.log(
+            '%c👋 Bienvenue sur mon Portfolio!',
+            'color: #ff8800; font-size: 20px; font-weight: bold;'
+        );
+        console.log(
+            '%c🚀 Développé avec passion par Adam Poussi',
+            'color: #27ae60; font-size: 14px;'
+        );
+        console.log(
+            '%c💼 Contactez-moi pour vos projets web!',
+            'color: #3498db; font-size: 14px;'
+        );
+    }
+}
+
+// ===== DÉMARRAGE DE L'APPLICATION =====
+const portfolio = new Portfolio();
+
+// ===== GESTION DES ERREURS GLOBALES =====
+window.addEventListener('error', (e) => {
+    console.error('Erreur détectée:', e.error);
 });
 
-
-/************************************/
-document.getElementById('contactForm').addEventListener('submit', function(e) {
-    e.preventDefault();
-    
-    const nom = document.getElementById('nom').value;
-    const prenom = document.getElementById('prenom').value;
-    const email = document.getElementById('email').value;
-    const message = document.getElementById('message').value;
-    
-    const sujet = encodeURIComponent(`Contact de ${prenom} ${nom}`);
-    const corps = encodeURIComponent(
-        `Nom: ${nom}\n` +
-        `Prénom: ${prenom}\n` +
-        `Email: ${email}\n\n` +
-        `Message:\n${message}`
-    );
-    
-    window.location.href = `mailto:roskyadam7@gmail.com?subject=${sujet}&body=${corps}`;
+// ===== PERFORMANCE MONITORING =====
+window.addEventListener('load', () => {
+    if ('performance' in window) {
+        const perfData = window.performance.timing;
+        const pageLoadTime = perfData.loadEventEnd - perfData.navigationStart;
+        console.log(`⚡ Temps de chargement: ${pageLoadTime}ms`);
+    }
 });
