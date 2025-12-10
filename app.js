@@ -91,7 +91,6 @@ class TypedAnimations {
                 'Développeur Web',
                 'Gestionnaire de Données',
                 'Data Analyst',
-                'Full Stack Developer'
             ],
             typeSpeed: 80,
             backSpeed: 80,
@@ -336,107 +335,38 @@ class NotificationSystem {
 }
 
 // ===== FORMULAIRE DE CONTACT =====
-class ContactForm {
-    constructor() {
-        this.form = document.getElementById('contactForm');
-        this.submitButton = this.form?.querySelector('button[type="submit"]');
-        this.notification = new NotificationSystem();
-        this.init();
-    }
+// Initialisation EmailJS avec ta clé publique
+(function() {
+    emailjs.init("p_WWm94VaaylHEPTc"); // YOUR PUBLIC KEY
+})();
 
-    init() {
-        if (!this.form) return;
+document.getElementById("contact-form").addEventListener("submit", function(e) {
+    e.preventDefault(); // Empêcher le rechargement
 
-        this.form.addEventListener('submit', (e) => this.handleSubmit(e));
-    }
+    // Récupération des valeurs du formulaire
+    const params = {
+        from_name: document.getElementById("from_name").value,
+        from_email: document.getElementById("from_email").value,
+        message: document.getElementById("message").value
+    };
 
-    handleSubmit(e) {
-        e.preventDefault();
+    // Envoi avec EmailJS
+    emailjs.send("service_czmjzgx", "template_z13umki", params)
+        .then(function(response) {
+            alert("Message envoyé avec succès !");
+            console.log("SUCCESS:", response);
+            document.getElementById("contact-form").reset();
+        }, function(error) {
+            alert("Une erreur est survenue. Réessaie plus tard.");
+            console.error("ERROR:", error);
+        });
+});
 
-        const formData = {
-            nom: document.getElementById('nom').value.trim(),
-            prenom: document.getElementById('prenom').value.trim(),
-            email: document.getElementById('email').value.trim(),
-            message: document.getElementById('message').value.trim()
-        };
+// ===== FIN DU FORMULAIRE DE CONTACT =====
 
-        if (!this.validateForm(formData)) {
-            return;
-        }
 
-        this.sendEmail(formData);
-    }
 
-    validateForm(data) {
-        // Vérifier que tous les champs sont remplis
-        if (!data.nom || !data.prenom || !data.email || !data.message) {
-            this.notification.show('Veuillez remplir tous les champs', 'error');
-            return false;
-        }
 
-        // Validation du nom et prénom (au moins 2 caractères)
-        if (data.nom.length < 2 || data.prenom.length < 2) {
-            this.notification.show('Le nom et prénom doivent contenir au moins 2 caractères', 'error');
-            return false;
-        }
-
-        // Validation de l'email
-        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-        if (!emailRegex.test(data.email)) {
-            this.notification.show('Adresse email invalide', 'error');
-            return false;
-        }
-
-        // Validation du message (au moins 10 caractères)
-        if (data.message.length < 10) {
-            this.notification.show('Le message doit contenir au moins 10 caractères', 'error');
-            return false;
-        }
-
-        return true;
-    }
-
-    sendEmail(data) {
-        // Désactiver le bouton pour éviter les envois multiples
-        if (this.submitButton) {
-            this.submitButton.disabled = true;
-            this.submitButton.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Envoi en cours...';
-        }
-
-        // Paramètres pour EmailJS
-        const templateParams = {
-            from_name: `${data.prenom} ${data.nom}`,
-            from_email: data.email,
-            to_name: 'Adam Poussi',
-            message: data.message,
-            reply_to: data.email
-        };
-
-        // Envoyer l'email via EmailJS
-        // Remplacez 'YOUR_SERVICE_ID' et 'YOUR_TEMPLATE_ID' par vos identifiants EmailJS
-        emailjs.send('service_czmjzgx', 'template_z13umki', templateParams)
-            .then(() => {
-                this.notification.show('Message envoyé avec succès ! 🎉', 'success');
-                this.form.reset();
-                
-                // Réactiver le bouton
-                if (this.submitButton) {
-                    this.submitButton.disabled = false;
-                    this.submitButton.innerHTML = '<i class="fas fa-paper-plane"></i> Envoyer';
-                }
-            })
-            .catch((error) => {
-                console.error('Erreur EmailJS:', error);
-                this.notification.show('Erreur lors de l\'envoi du message. Veuillez réessayer.', 'error');
-                
-                // Réactiver le bouton
-                if (this.submitButton) {
-                    this.submitButton.disabled = false;
-                    this.submitButton.innerHTML = '<i class="fas fa-paper-plane"></i> Envoyer';
-                }
-            });
-    }
-}
 
 // ===== ANIMATIONS DES CARTES =====
 class CardAnimations {

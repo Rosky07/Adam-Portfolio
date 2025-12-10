@@ -15,7 +15,12 @@
     
     <!-- Typed.js -->
     <script src="https://cdn.jsdelivr.net/npm/typed.js@2.0.12"></script>
-    
+
+
+    <!-- EmailJS -->
+    <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
+
+
     <!-- CSS -->
     <link rel="stylesheet" href="style.css">
 </head>
@@ -256,7 +261,7 @@
 
                     <div class="skill-item">
                         <div class="skill-info">
-                            <span class="skill-name">Data Analysis</span>
+                            <span class="skill-name">Data Analyst</span>
                             <span class="skill-percent">0%</span>
                         </div>
                         <div class="skill-bar">
@@ -302,36 +307,31 @@
             </div>
         </section>
 
-        <!-- ===== SECTION CONTACT ===== -->
+                <!-- ===== SECTION CONTACT ===== -->
         <section id="contact" class="scroll-section">
             <h3 class="section-title scroll-element">NOUS CONTACTER</h3>
             
-            <form id="contactForm" class="scroll-element">
-                <div class="form-row">
-                    <div class="form-group">
-                        <label for="nom">Nom :</label>
-                        <input type="text" id="nom" name="nom" required>
-                    </div>
-                    
-                    <div class="form-group">
-                        <label for="prenom">Prénom :</label>
-                        <input type="text" id="prenom" name="prenom" required>
-                    </div>
-                </div>
-                
+            <form id="contact-form" class="scroll-element">
+
                 <div class="form-group">
-                    <label for="email">Email :</label>
-                    <input type="email" id="email" name="email" required>
+                    <label for="from_name">Nom & Prénom :</label>
+                    <input type="text" id="from_name" name="from_name" placeholder="Votre nom complet" required>
                 </div>
-                
+
+                <div class="form-group">
+                    <label for="from_email">Email :</label>
+                    <input type="email" id="from_email" name="from_email" placeholder="Votre adresse email" required>
+                </div>
+
                 <div class="form-group">
                     <label for="message">Message :</label>
-                    <textarea id="message" name="message" rows="5" required></textarea>
+                    <textarea id="message" name="message" rows="5" placeholder="Votre message..." required></textarea>
                 </div>
-                
+
                 <button type="submit" class="btn-submit">
                     <i class="fas fa-paper-plane"></i> Envoyer
                 </button>
+
             </form>
         </section>
     </main>
