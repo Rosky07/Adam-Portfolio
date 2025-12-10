@@ -353,8 +353,9 @@ document.getElementById("contact-form").addEventListener("submit", function(e) {
     // Envoi avec EmailJS
     emailjs.send("service_czmjzgx", "template_z13umki", params)
         .then(function(response) {
-            alert("Message envoyé avec succès !");
+            this.notification.show("Message envoyé avec succès ! 🎉");
             console.log("SUCCESS:", response);
+
             document.getElementById("contact-form").reset();
         }, function(error) {
             alert("Une erreur est survenue. Réessaie plus tard.");
