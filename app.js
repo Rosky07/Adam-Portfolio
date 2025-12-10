@@ -339,6 +339,7 @@ class NotificationSystem {
 class ContactForm {
     constructor() {
         this.form = document.getElementById('contactForm');
+        this.submitButton = this.form?.querySelector('button[type="submit"]');
         this.notification = new NotificationSystem();
         this.init();
     }
@@ -360,7 +361,6 @@ class ContactForm {
         };
 
         if (!this.validateForm(formData)) {
-            this.notification.show('Veuillez remplir tous les champs correctement', 'error');
             return;
         }
 
@@ -368,13 +368,28 @@ class ContactForm {
     }
 
     validateForm(data) {
+        // Vérifier que tous les champs sont remplis
         if (!data.nom || !data.prenom || !data.email || !data.message) {
+            this.notification.show('Veuillez remplir tous les champs', 'error');
             return false;
         }
 
+        // Validation du nom et prénom (au moins 2 caractères)
+        if (data.nom.length < 2 || data.prenom.length < 2) {
+            this.notification.show('Le nom et prénom doivent contenir au moins 2 caractères', 'error');
+            return false;
+        }
+
+        // Validation de l'email
         const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
         if (!emailRegex.test(data.email)) {
-            this.notification.show('Email invalide', 'error');
+            this.notification.show('Adresse email invalide', 'error');
+            return false;
+        }
+
+        // Validation du message (au moins 10 caractères)
+        if (data.message.length < 10) {
+            this.notification.show('Le message doit contenir au moins 10 caractères', 'error');
             return false;
         }
 
@@ -382,18 +397,44 @@ class ContactForm {
     }
 
     sendEmail(data) {
-        const sujet = encodeURIComponent(`Contact de ${data.prenom} ${data.nom}`);
-        const corps = encodeURIComponent(
-            `Nom: ${data.nom}\n` +
-            `Prénom: ${data.prenom}\n` +
-            `Email: ${data.email}\n\n` +
-            `Message:\n${data.message}`
-        );
+        // Désactiver le bouton pour éviter les envois multiples
+        if (this.submitButton) {
+            this.submitButton.disabled = true;
+            this.submitButton.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Envoi en cours...';
+        }
 
-        window.location.href = `mailto:roskyadam7@gmail.com?subject=${sujet}&body=${corps}`;
-        
-        this.notification.show('Message envoyé avec succès ! 🎉', 'success');
-        this.form.reset();
+        // Paramètres pour EmailJS
+        const templateParams = {
+            from_name: `${data.prenom} ${data.nom}`,
+            from_email: data.email,
+            to_name: 'Adam Poussi',
+            message: data.message,
+            reply_to: data.email
+        };
+
+        // Envoyer l'email via EmailJS
+        // Remplacez 'YOUR_SERVICE_ID' et 'YOUR_TEMPLATE_ID' par vos identifiants EmailJS
+        emailjs.send('service_czmjzgx', 'template_z13umki', templateParams)
+            .then(() => {
+                this.notification.show('Message envoyé avec succès ! 🎉', 'success');
+                this.form.reset();
+                
+                // Réactiver le bouton
+                if (this.submitButton) {
+                    this.submitButton.disabled = false;
+                    this.submitButton.innerHTML = '<i class="fas fa-paper-plane"></i> Envoyer';
+                }
+            })
+            .catch((error) => {
+                console.error('Erreur EmailJS:', error);
+                this.notification.show('Erreur lors de l\'envoi du message. Veuillez réessayer.', 'error');
+                
+                // Réactiver le bouton
+                if (this.submitButton) {
+                    this.submitButton.disabled = false;
+                    this.submitButton.innerHTML = '<i class="fas fa-paper-plane"></i> Envoyer';
+                }
+            });
     }
 }
 
