@@ -350,17 +350,62 @@ document.getElementById("contact-form").addEventListener("submit", function(e) {
         message: document.getElementById("message").value
     };
 
-    // Envoi avec EmailJS
-    emailjs.send("service_czmjzgx", "template_z13umki", params)
-        .then(function(response) {
-            this.notification.show("Message envoyé avec succès ! 🎉");
-            console.log("SUCCESS:", response);
+        // Envoi avec EmailJS
+   // Fonction toast
+this.notification = {
+    show: (message, type) => {
+        const container = document.getElementById("toast-container");
+        const toast = document.createElement("div");
+        toast.className = `toast ${type}`;
+        toast.textContent = message;
 
-            document.getElementById("contact-form").reset();
-        }, function(error) {
-            alert("Une erreur est survenue. Réessaie plus tard.");
-            console.error("ERROR:", error);
-        });
+        container.appendChild(toast);
+
+        setTimeout(() => {
+            toast.remove();
+        }, 4000);
+    }
+};
+
+// Gestion popup
+const popup = document.getElementById("popup");
+const popupClose = document.getElementById("popup-close");
+
+popupClose.addEventListener("click", () => {
+    popup.classList.add("hidden");
+});
+
+// Loader
+const loader = document.getElementById("loader");
+
+
+// ---------------------------
+// TON CODE EmailJS adapté
+// ---------------------------
+
+loader.classList.remove("hidden"); // 👉 Affiche le loader
+
+emailjs.send("service_czmjzgx", "template_z13umki", params)
+    .then((response) => {
+
+        console.log("SUCCESS:", response);
+
+        loader.classList.add("hidden");         // 👉 Cache loader
+        this.notification.show("Message envoyé avec succès ! 🎉", "success"); 
+        popup.classList.remove("hidden");       // 👉 Popup animée
+
+        this.form.reset();                      // 👉 Reset propre
+        document.getElementById("contact-form").reset();
+
+    }, (error) => {
+
+        loader.classList.add("hidden");         // 👉 Cache loader même en erreur
+        console.error("ERROR:", error);
+
+        this.notification.show("Une erreur est survenue. Réessaie plus tard.", "error");
+    });
+
+
 });
 
 // ===== FIN DU FORMULAIRE DE CONTACT =====

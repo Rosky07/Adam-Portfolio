@@ -1322,3 +1322,106 @@ main {
         scroll-behavior: auto !important;
     }
 }
+
+
+
+
+/* ICI CEST LA APRTIE POPUP DE NOTIFICATIONS DE MAIL ENVOYE */
+
+/* Toast */
+#toast-container {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    z-index: 2000;
+}
+
+.toast {
+    padding: 12px 18px;
+    margin-top: 10px;
+    border-radius: 8px;
+    color: white;
+    font-size: 15px;
+    animation: fadeInOut 4s ease;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.15);
+}
+
+.toast.success { background: #28a745; }
+.toast.error { background: #dc3545; }
+
+@keyframes fadeInOut {
+    0% { opacity: 0; transform: translateX(50px); }
+    10% { opacity: 1; transform: translateX(0); }
+    90% { opacity: 1; }
+    100% { opacity: 0; transform: translateX(50px); }
+}
+
+/* Popup */
+#popup {
+    position: fixed;
+    inset: 0;
+    background: rgba(0,0,0,0.45);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 3000;
+    opacity: 1;
+    transition: opacity .3s ease;
+}
+
+#popup.hidden {
+    opacity: 0;
+    pointer-events: none;
+}
+
+.popup-content {
+    background: white;
+    padding: 25px;
+    border-radius: 10px;
+    text-align: center;
+    width: 350px;
+    animation: popupScale .4s ease;
+}
+
+@keyframes popupScale {
+    0% { transform: scale(.6); opacity: 0; }
+    100% { transform: scale(1); opacity: 1; }
+}
+
+#popup button {
+    margin-top: 15px;
+    padding: 8px 18px;
+    background: #007bff;
+    border: none;
+    border-radius: 6px;
+    color: white;
+    cursor: pointer;
+}
+
+/* Loader */
+#loader {
+    position: fixed;
+    inset: 0;
+    background: rgba(255,255,255,0.8);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 4000;
+}
+
+#loader.hidden {
+    display: none;
+}
+
+.spinner {
+    width: 40px;
+    height: 40px;
+    border: 4px solid #ccc;
+    border-top-color: #007bff;
+    border-radius: 50%;
+    animation: spin .8s linear infinite;
+}
+
+@keyframes spin {
+    to { transform: rotate(360deg); }
+}
