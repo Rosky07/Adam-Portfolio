@@ -23,6 +23,33 @@
 
     <!-- CSS -->
     <link rel="stylesheet" href="style.css">
+    <!-- Back to top styles (petit style local pour l'icône) -->
+    <style>
+        #backToTop{
+            position:fixed;
+            right:20px;
+            bottom:20px;
+            width:44px;
+            height:44px;
+            background:var(--primary);
+            color:#fff;
+            border:none;
+            border-radius:50%;
+            display:flex;
+            align-items:center;
+            justify-content:center;
+            box-shadow:0 8px 20px rgba(0,0,0,0.3);
+            cursor:pointer;
+            z-index:2000;
+            opacity:0;
+            visibility:hidden;
+            transform:translateY(10px);
+            transition:opacity .25s ease,transform .25s ease,visibility .25s;
+        }
+        #backToTop.show{opacity:1;visibility:visible;transform:translateY(0)}
+        #backToTop svg{width:18px;height:18px;fill:#fff}
+        #backToTop:focus{outline:2px solid rgba(255,255,255,0.9);outline-offset:3px}
+    </style>
 </head>
 <body>
     <!-- ===== HEADER ===== -->
@@ -390,6 +417,11 @@
 <div id="loader" class="hidden">
     <div class="spinner"></div>
 </div>
+
+    <!-- Bouton Remonter en haut -->
+    <button id="backToTop" aria-label="Remonter en haut" title="Remonter en haut">
+        <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path d="M12 8l-6 8h12z"/></svg>
+    </button>
 
     <!-- JavaScript -->
      <script type="text/javascript">

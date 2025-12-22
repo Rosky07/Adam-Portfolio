@@ -192,7 +192,7 @@ main {
     justify-content: space-between;
     align-items: center;
     min-height: 100vh;
-    padding: 2rem 0;
+    padding: 2rem 2rem;
     gap: 3rem;
     background: radial-gradient(circle at 20% 80%, rgba(120, 119, 198, 0.3), transparent 50%),
                 radial-gradient(circle at 80% 20%, rgba(255, 136, 0, 0.3), transparent 50%);
@@ -220,7 +220,7 @@ main {
 }
 
 .home-content h3 {
-    font-size: clamp(1.3rem, 2.5vw, 2rem);
+    font-size: clamp(1.1rem, 2.5vw, 2rem);
     font-weight: 400;
     color: white;
     margin-bottom: 1.2rem;
