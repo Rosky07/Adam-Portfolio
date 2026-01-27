@@ -1,0 +1,596 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="Portfolio professionnel d'Adam Poussi - Développeur Web Full Stack et Data Analyst">
+    <link rel="icon" type="image/png" href="./assets/logo1.PNG">
+    <title>Adam Poussi - Portfolio Développeur Web & Data</title>
+    
+    <!-- Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: '#ff8800',
+                        'primary-light': '#ffaa44',
+                        secondary: '#7877c6',
+                        'bg-dark': '#0a0909',
+                        'text-light': '#f1f1f1',
+                        'text-gray': '#ccc',
+                    },
+                    fontFamily: {
+                        'poppins': ['Poppins', 'sans-serif'],
+                    },
+                    animation: {
+                        'float': 'float 6s ease-in-out infinite',
+                        'fade-in': 'fadeIn 0.5s ease',
+                        'slide-in': 'slideIn 0.5s ease',
+                        'slide-out': 'slideOut 0.5s ease',
+                    },
+                    keyframes: {
+                        float: {
+                            '0%, 100%': { transform: 'translateY(0px)' },
+                            '50%': { transform: 'translateY(-20px)' },
+                        },
+                        fadeIn: {
+                            '0%': { opacity: '0' },
+                            '100%': { opacity: '1' },
+                        },
+                        slideIn: {
+                            '0%': { transform: 'translateX(400px)', opacity: '0' },
+                            '100%': { transform: 'translateX(0)', opacity: '1' },
+                        },
+                        slideOut: {
+                            '0%': { transform: 'translateX(0)', opacity: '1' },
+                            '100%': { transform: 'translateX(400px)', opacity: '0' },
+                        },
+                    },
+                }
+            }
+        }
+    </script>
+
+    <!-- Typed.js -->
+    <script src="https://cdn.jsdelivr.net/npm/typed.js@2.0.12"></script>
+
+
+    <!-- EmailJS -->
+    <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
+
+
+    <!-- CSS -->
+    <link rel="stylesheet" href="style.css">
+    <!-- Back to top styles (petit style local pour l'icône) -->
+    <style>
+        #backToTop{
+            position:fixed;
+            right:20px;
+            bottom:20px;
+            width:44px;
+            height:44px;
+            background:var(--primary);
+            color:#fff;
+            border:none;
+            border-radius:50%;
+            display:flex;
+            align-items:center;
+            justify-content:center;
+            box-shadow:0 8px 20px rgba(0,0,0,0.3);
+            cursor:pointer;
+            z-index:2000;
+            opacity:0;
+            visibility:hidden;
+            transform:translateY(10px);
+            transition:opacity .25s ease,transform .25s ease,visibility .25s;
+        }
+        #backToTop.show{opacity:1;visibility:visible;transform:translateY(0)}
+        #backToTop svg{width:18px;height:18px;fill:#fff}
+        #backToTop:focus{outline:2px solid rgba(255,255,255,0.9);outline-offset:3px}
+    </style>
+</head>
+<body>
+    <!-- ===== HEADER ===== -->
+    <header class="fixed top-0 w-full bg-black/95 backdrop-blur-[20px] px-[5%] py-4 flex justify-between items-center z-50 shadow-[0_2px_20px_rgba(255,136,0,0.2)] transition-all duration-300">
+        <a href="#accueil" id="logo" class="w-12 h-12 rounded-full overflow-hidden border-4 border-primary transition-all duration-300 block no-underline" aria-label="Retour à l'accueil">
+            <img src="./assets/logo1.PNG" alt="Logo Adam Poussi" class="w-full h-full object-cover transition-transform duration-300 hover:scale-110">
+        </a>
+        
+        <nav id="navbar" class="hidden md:flex">
+            <ul class="flex gap-8 list-none">
+                <li><a href="#accueil" class="text-white no-underline font-medium relative transition-all duration-300 hover:text-primary after:content-[''] after:absolute after:w-0 after:h-0.5 after:bottom-[-5px] after:left-0 after:bg-gradient-to-r after:from-primary after:to-primary-light after:transition-all after:duration-300 hover:after:w-full">Accueil</a></li>
+                <li><a href="#apropos" class="text-white no-underline font-medium relative transition-all duration-300 hover:text-primary after:content-[''] after:absolute after:w-0 after:h-0.5 after:bottom-[-5px] after:left-0 after:bg-gradient-to-r after:from-primary after:to-primary-light after:transition-all after:duration-300 hover:after:w-full">À Propos</a></li>
+                <li><a href="#experiences" class="text-white no-underline font-medium relative transition-all duration-300 hover:text-primary after:content-[''] after:absolute after:w-0 after:h-0.5 after:bottom-[-5px] after:left-0 after:bg-gradient-to-r after:from-primary after:to-primary-light after:transition-all after:duration-300 hover:after:w-full">Expériences</a></li>
+                <li><a href="#competences" class="text-white no-underline font-medium relative transition-all duration-300 hover:text-primary after:content-[''] after:absolute after:w-0 after:h-0.5 after:bottom-[-5px] after:left-0 after:bg-gradient-to-r after:from-primary after:to-primary-light after:transition-all after:duration-300 hover:after:w-full">Compétences</a></li>
+                <li><a href="#formations" class="text-white no-underline font-medium relative transition-all duration-300 hover:text-primary after:content-[''] after:absolute after:w-0 after:h-0.5 after:bottom-[-5px] after:left-0 after:bg-gradient-to-r after:from-primary after:to-primary-light after:transition-all after:duration-300 hover:after:w-full">Formations</a></li>
+                <li><a href="#contact" class="text-white no-underline font-medium relative transition-all duration-300 hover:text-primary after:content-[''] after:absolute after:w-0 after:h-0.5 after:bottom-[-5px] after:left-0 after:bg-gradient-to-r after:from-primary after:to-primary-light after:transition-all after:duration-300 hover:after:w-full">Contact</a></li>
+            </ul>
+        </nav>
+        
+        <button class="menu-toggle md:hidden flex flex-col gap-1 bg-transparent border-none cursor-pointer z-[1001]" id="menuToggle" aria-label="Menu de navigation" aria-expanded="false">
+            <span class="w-6 h-0.5 bg-primary rounded transition-all duration-300"></span>
+            <span class="w-6 h-0.5 bg-primary rounded transition-all duration-300"></span>
+            <span class="w-6 h-0.5 bg-primary rounded transition-all duration-300"></span>
+        </button>
+    </header>
+
+    <main class="mt-20 px-[5%]">
+        <!-- ===== SECTION ACCUEIL ===== -->
+        <section class="home scroll-section min-h-screen flex flex-col md:flex-row justify-between items-center p-8 gap-12 bg-radial-gradient relative" id="accueil">
+            <div class="home-content scroll-element flex-1 max-w-lg">
+                <h1 class="text-4xl md:text-5xl lg:text-6xl bg-gradient-to-r from-primary to-white bg-clip-text text-transparent mb-4">Bienvenue sur Mon Portfolio</h1>
+                <h2 class="text-xl md:text-2xl lg:text-3xl font-light text-white mb-2">Hello, je suis <span class="highlight text-primary">Adam Poussi</span></h2>
+                <h3 class="text-lg md:text-xl lg:text-2xl font-light text-white mb-6">et je suis <span class="multiple text-orange-500"></span></h3>
+                <p class="text-base md:text-lg text-gray-300 mb-6 leading-relaxed">Explorez mon univers numérique : un portfolio de développement web où la créativité rencontre la fonctionnalité pour créer des expériences en ligne exceptionnelles.</p>
+                
+                <div class="social-media flex gap-4 flex-wrap">
+                    <a href="https://wa.me/+2250758280357" target="_blank" class="w-16 h-16 flex justify-center items-center text-xl text-primary border border-primary rounded-full transition-all duration-300 hover:bg-primary hover:shadow-[0_0_16px_rgba(255,136,0,1)] hover:text-white hover:-translate-y-1" aria-label="WhatsApp"><i class="fab fa-whatsapp"></i></a>
+                    <a href="https://www.linkedin.com/in/adam-poussi-66218b9a" target="_blank" class="w-16 h-16 flex justify-center items-center text-xl text-primary border border-primary rounded-full transition-all duration-300 hover:bg-primary hover:shadow-[0_0_16px_rgba(255,136,0,1)] hover:text-white hover:-translate-y-1" aria-label="LinkedIn"><i class="fab fa-linkedin"></i></a>
+                    <a href="https://github.com/Rosky07" target="_blank" class="w-16 h-16 flex justify-center items-center text-xl text-primary border border-primary rounded-full transition-all duration-300 hover:bg-primary hover:shadow-[0_0_16px_rgba(255,136,0,1)] hover:text-white hover:-translate-y-1" aria-label="GitHub"><i class="fab fa-github"></i></a>
+                </div>
+            </div>
+            
+            <div class="home-img scroll-element flex justify-center items-center flex-1">
+                <img src="./assets/veste1.JPG" alt="Photo de profil Adam Poussi" class="w-full max-w-md h-auto aspect-square rounded-full object-cover border-4 border-orange-300/30 shadow-[0_20px_40px_rgba(255,136,0,0.2)] animate-float">
+            </div>
+        </section>
+
+        <!-- ===== SECTION À PROPOS ===== -->
+        <section class="hero scroll-section min-h-screen flex items-center py-20" id="apropos">
+            <div class="hero-content max-w-6xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-20 items-center">
+                <div class="text-content flex flex-col justify-center scroll-element">
+                    <div class="propos">
+                        <h2 class="text-3xl md:text-4xl lg:text-5xl mb-6 text-white"><span class="bg-gradient-to-r from-primary to-primary-light bg-clip-text text-transparent">À Propos</span></h2>
+                        <p class="text-gray-300 text-base md:text-lg leading-relaxed mb-4">
+                            En tant que développeur web spécialisé dans le traitement des données, 
+                            je conçois des applications qui permettent la collecte, 
+                            la centralisation et la transformation des données en informations exploitables. 
+                            Fort d'une expérience significative dans la gestion, la qualité et l'analyse des données, 
+                            je suis en mesure de mettre en œuvre des bases de données robustes, des API fiables, 
+                            des automatisations et des tableaux de bord décisionnels.
+                        </p>
+                        <p class="text-gray-300 text-base md:text-lg leading-relaxed mb-6">
+                            En alliant les compétences en développement web et en gestion des données, 
+                            je propose aux entreprises des solutions pour optimiser leurs processus, 
+                            améliorer leur prise de décision et valoriser leurs données comme un actif stratégique majeur.
+                        </p>
+                        <!--<a href="#" id="downloadCV" class="btn-cv inline-block mt-4 px-8 py-4 bg-gradient-to-r from-primary to-primary-light text-white no-underline rounded-full font-semibold transition-all duration-300 shadow-[0_10px_30px_rgba(255,136,0,0.4)] hover:shadow-[0_15px_40px_rgba(255,136,0,0.6)] hover:-translate-y-1"><i class="fas fa-download mr-2"></i>Télécharger mon CV</a>
+                                    -->
+                        <!-- Bouton de téléchargement du CV
+                            Le href="#" empêche la navigation classique
+                            Le téléchargement sera géré par JavaScript -->
+                        <a href="#" 
+                        id="downloadCV" 
+                        class="btn-cv inline-block mt-4 px-8 py-4 bg-gradient-to-r from-primary to-primary-light text-white no-underline rounded-full font-semibold transition-all duration-300 shadow-[0_10px_30px_rgba(255,136,0,0.4)] 
+                        hover:shadow-[0_15px_40px_rgba(255,136,0,0.6)] hover:-translate-y-1">
+                        <i class="fas fa-download mr-2"></i>
+                        Télécharger mon CV
+                        </a>
+                    </div>
+                </div>
+                <div class="hero-image text-center scroll-element">
+                    <img src="./assets/veste3.JPG" alt="Adam Poussi - Développeur Web" class="photo w-full max-w-sm h-auto aspect-square rounded-full object-cover border-4 border-orange-300/30 shadow-[0_20px_40px_rgba(255,136,0,0.2)] animate-float transition-all duration-300 hover:scale-105 hover:rotate-2 hover:border-primary hover:shadow-[0_30px_60px_rgba(255,136,0,0.4)]">
+                </div>
+            </div>
+        </section>
+
+        <!-- ===== SECTION EXPÉRIENCES ===== -->
+        <section class="experiences scroll-section py-32 max-w-6xl mx-auto" id="experiences">
+            <h3 class="section-title scroll-element text-3xl md:text-4xl lg:text-5xl text-center mb-16 text-white font-bold relative after:content-[''] after:absolute after:bottom-[-10px] after:left-1/2 after:transform after:-translate-x-1/2 after:w-20 after:h-1 after:bg-gradient-to-r after:from-primary after:to-primary-light after:rounded">MES EXPÉRIENCES PROFESSIONNELLES</h3>
+            
+             <div class="timeline relative py-16">
+
+                <!-- Ligne centrale -->
+                <div class="hidden md:block absolute left-1/2 top-0 -translate-x-1/2 w-1 h-full bg-gradient-to-b from-primary to-primary-light"></div>
+
+                <!-- ===== EXPÉRIENCE 1 : GAUCHE ===== -->
+                <div class="grid grid-cols-1 md:grid-cols-[1fr_80px_1fr] gap-8 mb-24 items-start scroll-element">
+                    <!-- Contenu gauche -->
+                    <div class="md:text-right">
+                        <span class="text-primary font-semibold text-lg">Février 2023 - Présent</span>
+                        <div class="mt-4 bg-white/10 backdrop-blur-[20px] border border-white/20 p-8 rounded-3xl shadow-lg hover:shadow-[0_20px_40px_rgba(255,136,0,0.3)] transition">
+                            <h4 class="text-white text-2xl mb-2">Gestionnaire de Données Sanitaire</h4>
+                            <h5 class="text-primary mb-4">EPHD de Ferkessédougou</h5>
+                            <ul class="space-y-3 text-gray-300 text-left">
+                                <li>Collecte, validation et analyse des données sanitaires</li>
+                                <li>Amélioration de la qualité des données avec les équipes</li>
+                                <li>Exploitation de DHIS2 pour la correction des incohérences</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <!-- Point central -->
+                    <div class="relative flex justify-center">
+                        <span class="w-5 h-5 bg-primary rounded-full shadow-[0_0_20px_rgba(255,136,0,0.5)] z-10"></span>
+                    </div>
+
+                    <!-- Colonne droite vide -->
+                    <div></div>
+                </div>
+
+                <!-- ===== EXPÉRIENCE 2 : DROITE ===== -->
+                <div class="grid grid-cols-1 md:grid-cols-[1fr_80px_1fr] gap-8 mb-24 items-start scroll-element">
+                    <!-- Colonne gauche vide -->
+                    <div></div>
+
+                    <!-- Point central -->
+                    <div class="relative flex justify-center">
+                        <span class="w-5 h-5 bg-primary rounded-full shadow-[0_0_20px_rgba(255,136,0,0.5)] z-10"></span>
+                    </div>
+
+                    <!-- Contenu droite -->
+                    <div>
+                        <span class="text-primary font-semibold text-lg">Mars 2018 - Juin 2018</span>
+                        <div class="mt-4 bg-white/10 backdrop-blur-[20px] border border-white/20 p-8 rounded-3xl shadow-lg hover:shadow-[0_20px_40px_rgba(255,136,0,0.3)] transition">
+                            <h4 class="text-white text-2xl mb-2">Stagiaire en Développement Web</h4>
+                            <h5 class="text-primary mb-4">Panel Consultings – Abidjan</h5>
+                            <ul class="space-y-3 text-gray-300">
+                                <li>Développement de sites e-commerce</li>
+                                <li>Création et gestion de bases de données</li>
+                                <li>Optimisation des performances web</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- ===== EXPÉRIENCE 3 : GAUCHE ===== -->
+                <div class="grid grid-cols-1 md:grid-cols-[1fr_80px_1fr] gap-8 items-start scroll-element">
+                    <!-- Contenu gauche -->
+                    <div class="md:text-right">
+                        <span class="text-primary font-semibold text-lg">Mars 2018 - Juin 2018</span>
+                        <div class="mt-4 bg-white/10 backdrop-blur-[20px] border border-white/20 p-8 rounded-3xl shadow-lg hover:shadow-[0_20px_40px_rgba(255,136,0,0.3)] transition">
+                            <h4 class="text-white text-2xl mb-2">Formateur en Programmation (DevKids)</h4>
+                            <h5 class="text-primary mb-4">Panel Consultings</h5>
+                            <ul class="space-y-3 text-gray-300 text-left">
+                                <li>Initiation des enfants à Scratch</li>
+                                <li>Participation à la coordination de projets web</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <!-- Point central -->
+                    <div class="relative flex justify-center">
+                        <span class="w-5 h-5 bg-primary rounded-full shadow-[0_0_20px_rgba(255,136,0,0.5)] z-10"></span>
+                    </div>
+
+                    <!-- Colonne droite vide -->
+                    <div></div>
+                </div>
+             </div>
+        </section>
+
+        <!-- ===== SECTION COMPÉTENCES ===== -->
+        <section id="competences" class="scroll-section py-32 max-w-7xl mx-auto">
+            <h3 class="section-title scroll-element text-3xl md:text-4xl lg:text-5xl text-center mb-16 text-white font-bold relative after:content-[''] after:absolute after:bottom-[-10px] after:left-1/2 after:transform after:-translate-x-1/2 after:w-20 after:h-1 after:bg-gradient-to-r after:from-primary after:to-primary-light after:rounded">MES COMPÉTENCES</h3>
+            
+            <div class="comp grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 mb-8">
+                <div class="competence-card scroll-element bg-white/10 backdrop-blur-[20px] border border-white/20 p-10 rounded-3xl text-center transition-all duration-400 relative overflow-hidden hover:-translate-y-8 hover:scale-105 hover:bg-white/15 hover:shadow-[0_30px_60px_rgba(255,136,0,0.3)] before:content-[''] before:absolute before:top-0 before:left-[-100%] before:w-full before:h-full before:bg-gradient-to-r before:from-transparent before:via-orange-500/20 before:to-transparent before:transition-all before:duration-500 hover:before:left-full">
+                    <i class="fas fa-code text-5xl mb-6 bg-gradient-to-r from-blue-400 to-blue-600 bg-clip-text text-transparent"></i>
+                    <h4 class="text-white text-2xl mb-4 font-semibold">Développeur Web</h4>
+                    <p class="text-gray-300 mb-4">Passionné par le développement et la création, j'utilise les technologies comme:</p>
+                    <ul class="text-left">
+                        <li class="text-gray-300 mb-2 relative pl-6 before:content-['▹'] before:text-primary before:absolute before:left-0 before:font-bold">HTML</li>
+                        <li class="text-gray-300 mb-2 relative pl-6 before:content-['▹'] before:text-primary before:absolute before:left-0 before:font-bold">CSS</li>
+                        <li class="text-gray-300 mb-2 relative pl-6 before:content-['▹'] before:text-primary before:absolute before:left-0 before:font-bold">JavaScript</li>
+                        <li class="text-gray-300 mb-2 relative pl-6 before:content-['▹'] before:text-primary before:absolute before:left-0 before:font-bold">Intelligence Artificielle</li>
+                    </ul>
+                    <p class="slogan italic text-primary font-medium">Bientôt je m'attaquerais à ReactJs et d'autres Framework FrontEnd</p>
+                    <p class="text-gray-300">Pour vous faire des sites web performants et booster ma productivité !</p>
+                </div>
+
+                <div class="competence-card scroll-element bg-white/10 backdrop-blur-[20px] border border-white/20 p-10 rounded-3xl text-center transition-all duration-400 relative overflow-hidden hover:-translate-y-8 hover:scale-105 hover:bg-white/15 hover:shadow-[0_30px_60px_rgba(255,136,0,0.3)] before:content-[''] before:absolute before:top-0 before:left-[-100%] before:w-full before:h-full before:bg-gradient-to-r before:from-transparent before:via-orange-500/20 before:to-transparent before:transition-all before:duration-500 hover:before:left-full">
+                    <i class="fas fa-chart-line text-5xl mb-6 bg-gradient-to-r from-green-400 to-green-600 bg-clip-text text-transparent"></i>
+                    <h4 class="text-white text-2xl mb-4 font-semibold">Data Analyst</h4>
+                    <p class="text-gray-300 mb-4">Les données sont omniprésentes dans notre société. Je me lance dans la Data Analyst dans le milieu sanitaire pour apporter de la valeur au système de Santé.</p>
+                    <p class="text-gray-300">Etant un Gestionnaire de Données sanitaire, mes connaissances et compétences en matière d'analyse de données me sont grandement profitables pour mon métier, et celà m'aide grandement dans l'accomplissement de mes tâches !</p>
+                </div>
+
+                <div class="competence-card scroll-element bg-white/10 backdrop-blur-[20px] border border-white/20 p-10 rounded-3xl text-center transition-all duration-400 relative overflow-hidden hover:-translate-y-8 hover:scale-105 hover:bg-white/15 hover:shadow-[0_30px_60px_rgba(255,136,0,0.3)] before:content-[''] before:absolute before:top-0 before:left-[-100%] before:w-full before:h-full before:bg-gradient-to-r before:from-transparent before:via-orange-500/20 before:to-transparent before:transition-all before:duration-500 hover:before:left-full">
+                    <i class="fas fa-database text-5xl mb-6 bg-gradient-to-r from-purple-400 to-purple-600 bg-clip-text text-transparent"></i>
+                    <h4 class="text-white text-2xl mb-4 font-semibold">Base de Données</h4>
+                    <p class="text-gray-300">Maîtrise Partiel des SGBD relationnels (MySQL, MongoDB) et NoSQL pour gérer efficacement les données structurées et non-structurées.</p>
+                </div>
+
+                <div class="competence-card scroll-element bg-white/10 backdrop-blur-[20px] border border-white/20 p-10 rounded-3xl text-center transition-all duration-400 relative overflow-hidden hover:-translate-y-8 hover:scale-105 hover:bg-white/15 hover:shadow-[0_30px_60px_rgba(255,136,0,0.3)] before:content-[''] before:absolute before:top-0 before:left-[-100%] before:w-full before:h-full before:bg-gradient-to-r before:from-transparent before:via-orange-500/20 before:to-transparent before:transition-all before:duration-500 hover:before:left-full">
+                    <i class="fas fa-server text-5xl mb-6 bg-gradient-to-r from-orange-400 to-orange-600 bg-clip-text text-transparent"></i>
+                    <h4 class="text-white text-2xl mb-4 font-semibold">Backend</h4>
+                    <p class="text-gray-300">Développement BackEnd, j'utilise MySQL/PHP pour me faire un BackEnd bien structuré et fluide pour mes projets !</p>
+                </div>
+            </div>
+
+            <!-- ===== COMPÉTENCES TECHNIQUES ===== -->
+        <div class="technical-skills scroll-element mt-20 p-12 bg-white/5 backdrop-blur-[20px] border border-white/10 rounded-3xl">
+
+                <h4 class="subsection-title text-2xl md:text-3xl lg:text-4xl text-white text-center mb-12 relative
+                    after:content-[''] after:absolute after:bottom-[-10px] after:left-1/2 after:-translate-x-1/2
+                    after:w-16 after:h-1 after:bg-gradient-to-r after:from-primary after:to-primary-light after:rounded">
+                    Compétences Techniques
+                </h4>
+
+            <div class="skills-grid grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+
+                <!-- HTML / CSS -->
+                <div class="skill-item p-6 bg-white/5 rounded-2xl transition-all duration-300 hover:bg-white/10 hover:-translate-y-2">
+                    <div class="skill-info flex justify-between items-center mb-2">
+                        <span class="skill-name text-white font-medium text-lg">HTML / CSS</span>
+                        <span class="skill-percent text-primary font-semibold text-lg min-w-[45px] text-right">0%</span>
+                    </div>
+                    <p class="skill-level text-sm text-white/80 mb-2 opacity-0 translate-y-2 transition-all duration-500">
+                        Niveau : <span class="font-semibold text-white">—</span>
+                    </p>
+                    <div class="skill-bar h-3 bg-white/10 rounded-full overflow-hidden">
+                        <div class="skill-progress h-full bg-gradient-to-r from-primary to-primary-light rounded-full w-0
+                            transition-all duration-[2500ms] ease-out shadow-[0_0_10px_rgba(255,136,0,0.5)]"
+                            data-progress="70">
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Bootstrap -->
+                <div class="skill-item p-6 bg-white/5 rounded-2xl transition-all duration-300 hover:bg-white/10 hover:-translate-y-2">
+                    <div class="skill-info flex justify-between items-center mb-2">
+                        <span class="skill-name text-white font-medium text-lg">Bootstrap</span>
+                        <span class="skill-percent text-primary font-semibold text-lg min-w-[45px] text-right">0%</span>
+                    </div>
+                    <p class="skill-level text-sm text-white/80 mb-2 opacity-0 translate-y-2 transition-all duration-500">
+                        Niveau : <span class="font-semibold text-white">—</span>
+                    </p>
+                    <div class="skill-bar h-3 bg-white/10 rounded-full overflow-hidden">
+                        <div class="skill-progress h-full bg-gradient-to-r from-primary to-primary-light rounded-full w-0
+                            transition-all duration-[2500ms] ease-out shadow-[0_0_10px_rgba(255,136,0,0.5)]"
+                            data-progress="60"></div>
+                    </div>
+                </div>
+
+                <!-- JavaScript -->
+                <div class="skill-item p-6 bg-white/5 rounded-2xl transition-all duration-300 hover:bg-white/10 hover:-translate-y-2">
+                    <div class="skill-info flex justify-between items-center mb-2">
+                        <span class="skill-name text-white font-medium text-lg">JavaScript</span>
+                        <span class="skill-percent text-primary font-semibold text-lg min-w-[45px] text-right">0%</span>
+                    </div>
+                    <p class="skill-level text-sm text-white/80 mb-2 opacity-0 translate-y-2 transition-all duration-500">
+                        Niveau : <span class="font-semibold text-white">—</span>
+                    </p>
+                    <div class="skill-bar h-3 bg-white/10 rounded-full overflow-hidden">
+                        <div class="skill-progress h-full bg-gradient-to-r from-primary to-primary-light rounded-full w-0
+                            transition-all duration-[2500ms] ease-out shadow-[0_0_10px_rgba(255,136,0,0.5)]"
+                            data-progress="10"></div>
+                    </div>
+                </div>
+
+                <!-- PHP / MySQL -->
+                <div class="skill-item p-6 bg-white/5 rounded-2xl transition-all duration-300 hover:bg-white/10 hover:-translate-y-2">
+                    <div class="skill-info flex justify-between items-center mb-2">
+                        <span class="skill-name text-white font-medium text-lg">PHP / MySQL</span>
+                        <span class="skill-percent text-primary font-semibold text-lg min-w-[45px] text-right">0%</span>
+                    </div>
+                    <p class="skill-level text-sm text-white/80 mb-2 opacity-0 translate-y-2 transition-all duration-500">
+                        Niveau : <span class="font-semibold text-white">—</span>
+                    </p>
+                    <div class="skill-bar h-3 bg-white/10 rounded-full overflow-hidden">
+                        <div class="skill-progress h-full bg-gradient-to-r from-primary to-primary-light rounded-full w-0
+                            transition-all duration-[2500ms] ease-out shadow-[0_0_10px_rgba(255,136,0,0.5)]"
+                            data-progress="45"></div>
+                    </div>
+                </div>
+
+                <!-- Python -->
+                <div class="skill-item p-6 bg-white/5 rounded-2xl transition-all duration-300 hover:bg-white/10 hover:-translate-y-2">
+                    <div class="skill-info flex justify-between items-center mb-2">
+                        <span class="skill-name text-white font-medium text-lg">Python</span>
+                        <span class="skill-percent text-primary font-semibold text-lg min-w-[45px] text-right">0%</span>
+                    </div>
+                    <p class="skill-level text-sm text-white/80 mb-2 opacity-0 translate-y-2 transition-all duration-500">
+                        Niveau : <span class="font-semibold text-white">—</span>
+                    </p>
+                    <div class="skill-bar h-3 bg-white/10 rounded-full overflow-hidden">
+                        <div class="skill-progress h-full bg-gradient-to-r from-primary to-primary-light rounded-full w-0
+                            transition-all duration-[2500ms] ease-out shadow-[0_0_10px_rgba(255,136,0,0.5)]"
+                            data-progress="40"></div>
+                    </div>
+                </div>
+
+                <!-- Excel -->
+                <div class="skill-item p-6 bg-white/5 rounded-2xl transition-all duration-300 hover:bg-white/10 hover:-translate-y-2">
+                    <div class="skill-info flex justify-between items-center mb-2">
+                        <span class="skill-name text-white font-medium text-lg">Excel</span>
+                        <span class="skill-percent text-primary font-semibold text-lg min-w-[45px] text-right">0%</span>
+                    </div>
+                    <p class="skill-level text-sm text-white/80 mb-2 opacity-0 translate-y-2 transition-all duration-500">
+                        Niveau : <span class="font-semibold text-white">—</span>
+                    </p>
+                    <div class="skill-bar h-3 bg-white/10 rounded-full overflow-hidden">
+                        <div class="skill-progress h-full bg-gradient-to-r from-primary to-primary-light rounded-full w-0
+                            transition-all duration-[2500ms] ease-out shadow-[0_0_10px_rgba(255,136,0,0.5)]"
+                            data-progress="60"></div>
+                    </div>
+                </div>
+
+                  <!-- Word -->
+                <div class="skill-item p-6 bg-white/5 rounded-2xl transition-all duration-300 hover:bg-white/10 hover:-translate-y-2">
+                    <div class="skill-info flex justify-between items-center mb-2">
+                        <span class="skill-name text-white font-medium text-lg">Word</span>
+                        <span class="skill-percent text-primary font-semibold text-lg min-w-[45px] text-right">0%</span>
+                    </div>
+                    <p class="skill-level text-sm text-white/80 mb-2 opacity-0 translate-y-2 transition-all duration-500">
+                        Niveau : <span class="font-semibold text-white">—</span>
+                    </p>
+                    <div class="skill-bar h-3 bg-white/10 rounded-full overflow-hidden">
+                        <div class="skill-progress h-full bg-gradient-to-r from-primary to-primary-light rounded-full w-0
+                            transition-all duration-[2500ms] ease-out shadow-[0_0_10px_rgba(255,136,0,0.5)]"
+                            data-progress="60"></div>
+                    </div>
+                </div>
+
+                <!-- DHIS2 -->
+                <div class="skill-item p-6 bg-white/5 rounded-2xl transition-all duration-300 hover:bg-white/10 hover:-translate-y-2">
+                    <div class="skill-info flex justify-between items-center mb-2">
+                        <span class="skill-name text-white font-medium text-lg">DHIS2</span>
+                        <span class="skill-percent text-primary font-semibold text-lg min-w-[45px] text-right">0%</span>
+                    </div>
+                    <p class="skill-level text-sm text-white/80 mb-2 opacity-0 translate-y-2 transition-all duration-500">
+                        Niveau : <span class="font-semibold text-white">—</span>
+                    </p>
+                    <div class="skill-bar h-3 bg-white/10 rounded-full overflow-hidden">
+                        <div class="skill-progress h-full bg-gradient-to-r from-primary to-primary-light rounded-full w-0
+                            transition-all duration-[2500ms] ease-out shadow-[0_0_10px_rgba(255,136,0,0.5)]"
+                            data-progress="55"></div>
+                    </div>
+                </div>
+
+                <!-- Git / GitHub -->
+                <div class="skill-item p-6 bg-white/5 rounded-2xl transition-all duration-300 hover:bg-white/10 hover:-translate-y-2">
+                    <div class="skill-info flex justify-between items-center mb-2">
+                        <span class="skill-name text-white font-medium text-lg">Git / GitHub</span>
+                        <span class="skill-percent text-primary font-semibold text-lg min-w-[45px] text-right">0%</span>
+                    </div>
+                    <p class="skill-level text-sm text-white/80 mb-2 opacity-0 translate-y-2 transition-all duration-500">
+                        Niveau : <span class="font-semibold text-white">—</span>
+                    </p>
+                    <div class="skill-bar h-3 bg-white/10 rounded-full overflow-hidden">
+                        <div class="skill-progress h-full bg-gradient-to-r from-primary to-primary-light rounded-full w-0
+                            transition-all duration-[2500ms] ease-out shadow-[0_0_10px_rgba(255,136,0,0.5)]"
+                            data-progress="20"></div>
+                    </div>
+                </div>
+            </div>
+        </div>   
+        </section>
+
+        <!-- ===== SECTION FORMATIONS ===== -->
+        <section id="formations" class="scroll-section py-32 max-w-7xl mx-auto">
+            <h3 class="section-title scroll-element text-3xl md:text-4xl lg:text-5xl text-center mb-16 text-white font-bold relative after:content-[''] after:absolute after:bottom-[-10px] after:left-1/2 after:transform after:-translate-x-1/2 after:w-20 after:h-1 after:bg-gradient-to-r after:from-primary after:to-primary-light after:rounded">MES FORMATIONS</h3>
+            
+            <div class="forma grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+                <div class="projet scroll-element bg-white/10 backdrop-blur-[20px] border border-orange-500/30 p-8 rounded-3xl text-center transition-all duration-300 hover:-translate-y-5 hover:bg-orange-500/15 hover:border-primary">
+                    <i class="fas fa-graduation-cap text-4xl text-primary mb-4"></i>
+                    <h4 class="text-white text-xl mb-4">Décembre 2023</h4>
+                    <h5 class="text-orange-400 text-xl mb-4">Formations sur le DHIS2</h5>
+                    <p class="text-gray-300">Formation sur le DHIS2 à Yamoussokro dans le cadre de la surveillance Epidémiologique.</p>
+                </div>
+
+                <div class="projet scroll-element bg-white/10 backdrop-blur-[20px] border border-orange-500/30 p-8 rounded-3xl text-center transition-all duration-300 hover:-translate-y-5 hover:bg-orange-500/15 hover:border-primary">
+                    <i class="fas fa-laptop-code text-4xl text-primary mb-4"></i>
+                    <h4 class="text-white text-xl mb-4">2020</h4>
+                    <h5 class="text-orange-400 text-xl mb-4">Licence Informatique à ITES II Plateaux Abidjan</h5>
+                    <p class="text-gray-300">Formation en développement web, bases de données, réseau Informatique, afin d'être prêt pour le marché de l'Emploi.</p>
+                </div>
+
+                <div class="projet scroll-element bg-white/10 backdrop-blur-[20px] border border-orange-500/30 p-8 rounded-3xl text-center transition-all duration-300 hover:-translate-y-5 hover:bg-orange-500/15 hover:border-primary">
+                    <i class="fas fa-database text-4xl text-primary mb-4"></i>
+                    <h4 class="text-white text-xl mb-4">2017</h4>
+                    <h5 class="text-orange-400 text-xl mb-4">BTS EN IDA à IST Saint Jacques de Bouaké</h5>
+                    <p class="text-gray-300">Formé sur les Bases de Données relationlle (NoSQL), le Html, CSS.</p>
+                </div>
+
+                <div class="projet scroll-element bg-white/10 backdrop-blur-[20px] border border-orange-500/30 p-8 rounded-3xl text-center transition-all duration-300 hover:-translate-y-5 hover:bg-orange-500/15 hover:border-primary">
+                    <i class="fas fa-school text-4xl text-primary mb-4"></i>
+                    <h4 class="text-white text-xl mb-4">2014</h4>
+                    <h5 class="text-orange-400 text-xl mb-4">Baccalauréat</h5>
+                    <p class="text-gray-300">Obtention du Baccalauréat en Série D au Lycée Moderne de Tengrela!</p>
+                </div>
+            </div>
+        </section>
+
+                <!-- ===== SECTION CONTACT ===== -->
+        <section id="contact" class="scroll-section py-32 max-w-2xl mx-auto text-center">
+            <h3 class="section-title scroll-element text-3xl md:text-4xl lg:text-5xl text-center mb-16 text-white font-bold relative after:content-[''] after:absolute after:bottom-[-10px] after:left-1/2 after:transform after:-translate-x-1/2 after:w-20 after:h-1 after:bg-gradient-to-r after:from-primary after:to-primary-light after:rounded">NOUS CONTACTER</h3>
+            
+            <form id="contact-form" class="scroll-element flex flex-col gap-6 mt-8">
+                <div class="form-group flex flex-col text-left">
+                    <label for="from_name" class="text-white mb-2 font-medium">Nom & Prénom :</label>
+                    <input type="text" id="from_name" name="from_name" placeholder="Votre nom complet" required class="p-4 border-2 border-white/20 rounded-xl bg-white/10 text-white placeholder-gray-400 font-inherit transition-all duration-300 focus:outline-none focus:border-primary focus:bg-white/15 focus:shadow-[0_0_20px_rgba(255,136,0,0.3)]">
+                </div>
+
+                <div class="form-group flex flex-col text-left">
+                    <label for="from_email" class="text-white mb-2 font-medium">Email :</label>
+                    <input type="email" id="from_email" name="from_email" placeholder="Votre adresse email" required class="p-4 border-2 border-white/20 rounded-xl bg-white/10 text-white placeholder-gray-400 font-inherit transition-all duration-300 focus:outline-none focus:border-primary focus:bg-white/15 focus:shadow-[0_0_20px_rgba(255,136,0,0.3)]">
+                </div>
+
+                <div class="form-group flex flex-col text-left">
+                    <label for="message" class="text-white mb-2 font-medium">Message :</label>
+                    <textarea id="message" name="message" rows="5" placeholder="Votre message..." required class="p-4 border-2 border-white/20 rounded-xl bg-white/10 text-white placeholder-gray-400 font-inherit transition-all duration-300 focus:outline-none focus:border-primary focus:bg-white/15 focus:shadow-[0_0_20px_rgba(255,136,0,0.3)] min-h-[150px] resize-vertical resize-none"></textarea>
+                </div>
+
+                <button type="submit" class="btn-submit px-12 py-4 bg-gradient-to-r from-primary to-primary-light text-white border-none rounded-full text-lg font-semibold cursor-pointer transition-all duration-300 hover:-translate-y-1 hover:shadow-[0_15px_40px_rgba(255,136,0,0.6)] mt-4">Envoyer <i class="fas fa-paper-plane ml-2"></i></button>
+            </form>
+        </section>
+    </main>
+
+    <!-- ===== FOOTER ===== -->
+    <footer class="footer bg-black/95 backdrop-blur-[20px] border-t border-orange-500/30 mt-20 relative overflow-hidden before:content-[''] before:absolute before:top-0 before:left-0 before:right-0 before:h-0.5 before:bg-gradient-to-r before:from-transparent before:to-primary before:from-primary">
+        <div class="footer-content max-w-7xl mx-auto px-[5%] py-12 pb-8 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12">
+            <div class="footer-section">
+                <h4 class="text-white text-xl mb-4 font-semibold relative pb-2 after:content-[''] after:absolute after:bottom-0 after:left-0 after:w-10 after:h-0.5 after:bg-gradient-to-r after:from-primary after:to-primary-light">Adam Poussi</h4>
+                <p class="text-gray-300 mb-4 text-sm">Développeur FullStack passionné</p>
+                <div class="social-media flex gap-4">
+                    <a href="https://wa.me/+2250758280357" target="_blank" class="w-12 h-12 bg-white/10 border border-white/20 rounded-xl flex justify-center items-center text-white text-lg transition-all duration-300 hover:-translate-y-1 hover:scale-110 hover:shadow-[0_10px_25px_rgba(255,136,0,0.4)] hover:border-primary backdrop-blur-[10px]" aria-label="WhatsApp"><i class="fab fa-whatsapp"></i></a>
+                    <a href="https://linkedin.com/in/adam-poussi" target="_blank" class="w-12 h-12 bg-white/10 border border-white/20 rounded-xl flex justify-center items-center text-white text-lg transition-all duration-300 hover:-translate-y-1 hover:scale-110 hover:shadow-[0_10px_25px_rgba(255,136,0,0.4)] hover:border-primary backdrop-blur-[10px]" aria-label="LinkedIn"><i class="fab fa-linkedin"></i></a>
+                    <a href="https://github.com/Rosky07" target="_blank" class="w-12 h-12 bg-white/10 border border-white/20 rounded-xl flex justify-center items-center text-white text-lg transition-all duration-300 hover:-translate-y-1 hover:scale-110 hover:shadow-[0_10px_25px_rgba(255,136,0,0.4)] hover:border-primary backdrop-blur-[10px]" aria-label="GitHub"><i class="fab fa-github"></i></a>
+                </div>
+            </div>
+
+            <div class="footer-section contact-info">
+                <h4 class="text-white text-xl mb-4 font-semibold relative pb-2 after:content-[''] after:absolute after:bottom-0 after:left-0 after:w-10 after:h-0.5 after:bg-gradient-to-r after:from-primary after:to-primary-light">Contact</h4>
+                <p class="text-gray-300 mb-4 text-sm flex items-center gap-2 transition-colors duration-300 hover:text-primary"><i class="fas fa-phone"></i> 07 58 28 03 57</p>
+                <p class="text-gray-300 mb-4 text-sm flex items-center gap-2 transition-colors duration-300 hover:text-primary"><i class="fas fa-phone"></i> 05 04 27 32 12</p>
+                <p class="text-gray-300 mb-4 text-sm flex items-center gap-2 transition-colors duration-300 hover:text-primary"><i class="fas fa-envelope"></i> roskyadam7@gmail.com</p>
+            </div>
+
+            <div class="footer-section">
+                <h4 class="text-white text-xl mb-4 font-semibold relative pb-2 after:content-[''] after:absolute after:bottom-0 after:left-0 after:w-10 after:h-0.5 after:bg-gradient-to-r after:from-primary after:to-primary-light">Liens Rapides</h4>
+                <ul class="list-none">
+                    <li class="mb-4 text-sm"><a href="#accueil" class="text-gray-300 no-underline transition-all duration-300 hover:text-primary hover:translate-x-2 inline-block">Accueil</a></li>
+                    <li class="mb-4 text-sm"><a href="#apropos" class="text-gray-300 no-underline transition-all duration-300 hover:text-primary hover:translate-x-2 inline-block">À Propos</a></li>
+                    <li class="mb-4 text-sm"><a href="#competences" class="text-gray-300 no-underline transition-all duration-300 hover:text-primary hover:translate-x-2 inline-block">Compétences</a></li>
+                    <li class="mb-4 text-sm"><a href="#formations" class="text-gray-300 no-underline transition-all duration-300 hover:text-primary hover:translate-x-2 inline-block">Formations</a></li>
+                    <li class="mb-4 text-sm"><a href="#contact" class="text-gray-300 no-underline transition-all duration-300 hover:text-primary hover:translate-x-2 inline-block">Contact</a></li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="footer-bottom bg-black/80 text-center py-6 px-[5%] text-gray-400 text-sm border-t border-orange-500/20">
+            <p>© 2025 Mon Portfolio. Tous droits réservés.</p>
+            <p>Développé avec ❤️ par Poussi Adam</p>
+        </div>
+    </footer>
+
+    <!-- Zone pour les notifications -->
+<div id="toast-container"></div>
+
+<!-- Popup de confirmation -->
+<div id="popup" class="hidden">
+    <div class="popup-content">
+        <h3>Message envoyé 🎉</h3>
+        <p>Votre message a été transmis avec succès.</p>
+        <button id="popup-close">OK</button>
+    </div>
+</div>
+
+<!-- Loader -->
+<div id="loader" class="hidden">
+    <div class="spinner"></div>
+</div>
+
+    <!-- Bouton Remonter en haut -->
+    <button id="backToTop" aria-label="Remonter en haut" title="Remonter en haut">
+        <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path d="M12 8l-6 8h12z"/>haut</svg>
+    </button>
+
+    <!-- JavaScript -->
+     <script type="text/javascript">
+    (function(){
+        emailjs.init("p_WWm94VaaylHEPTc"); // ← Votre clé publique ici
+    })();
+</script>
+    <script src="app.js"></script>
+</body>
+</html>
