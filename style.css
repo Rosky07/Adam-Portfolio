@@ -14,7 +14,6 @@ label:hover {
     cursor: pointer;
 }
 
-
 * {
     margin: 0;
     padding: 0;
@@ -40,7 +39,7 @@ body {
     opacity: 0;
     transform: translateY(50px);
     transition: opacity 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94),
-                transform 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+        transform 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94);
 }
 
 .scroll-element.scrolled {
@@ -137,24 +136,43 @@ nav.active {
     color: white;
     font-size: 15px;
     animation: fadeInOut 4s ease;
-    box-shadow: 0 4px 10px rgba(0,0,0,0.15);
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
 }
 
-.toast.success { background: #28a745; }
-.toast.error { background: #dc3545; }
+.toast.success {
+    background: #28a745;
+}
+
+.toast.error {
+    background: #dc3545;
+}
 
 @keyframes fadeInOut {
-    0% { opacity: 0; transform: translateX(50px); }
-    10% { opacity: 1; transform: translateX(0); }
-    90% { opacity: 1; }
-    100% { opacity: 0; transform: translateX(50px); }
+    0% {
+        opacity: 0;
+        transform: translateX(50px);
+    }
+
+    10% {
+        opacity: 1;
+        transform: translateX(0);
+    }
+
+    90% {
+        opacity: 1;
+    }
+
+    100% {
+        opacity: 0;
+        transform: translateX(50px);
+    }
 }
 
 /* ===== POPUP ===== */
 #popup {
     position: fixed;
     inset: 0;
-    background: rgba(0,0,0,0.45);
+    background: rgba(0, 0, 0, 0.45);
     display: flex;
     justify-content: center;
     align-items: center;
@@ -178,8 +196,15 @@ nav.active {
 }
 
 @keyframes popupScale {
-    0% { transform: scale(.6); opacity: 0; }
-    100% { transform: scale(1); opacity: 1; }
+    0% {
+        transform: scale(.6);
+        opacity: 0;
+    }
+
+    100% {
+        transform: scale(1);
+        opacity: 1;
+    }
 }
 
 #popup button {
@@ -196,7 +221,7 @@ nav.active {
 #loader {
     position: fixed;
     inset: 0;
-    background: rgba(255,255,255,0.8);
+    background: rgba(255, 255, 255, 0.8);
     display: flex;
     justify-content: center;
     align-items: center;
@@ -217,7 +242,9 @@ nav.active {
 }
 
 @keyframes spin {
-    to { transform: rotate(360deg); }
+    to {
+        transform: rotate(360deg);
+    }
 }
 
 /* ===== BACK TO TOP ===== */
@@ -234,7 +261,7 @@ nav.active {
     display: flex;
     align-items: center;
     justify-content: center;
-    box-shadow: 0 8px 20px rgba(0,0,0,0.3);
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
     cursor: pointer;
     z-index: 2000;
     opacity: 0;
@@ -256,12 +283,13 @@ nav.active {
 }
 
 #backToTop:focus {
-    outline: 2px solid rgba(255,255,255,0.9);
+    outline: 2px solid rgba(255, 255, 255, 0.9);
     outline-offset: 3px;
 }
 
 /* ===== PREFERENCES DE MOUVEMENT REDUIT ===== */
 @media (prefers-reduced-motion: reduce) {
+
     *,
     *::before,
     *::after {

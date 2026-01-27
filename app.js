@@ -1,6 +1,6 @@
 /* =====================================================
    PORTFOLIO - APP.JS
-   Version Professionnelle Optimisée
+   Version Professionnelle - Animation Cascade au Scroll
    ===================================================== */
 
 'use strict';
@@ -41,14 +41,10 @@ class MobileMenu {
 
     init() {
         if (!this.menuToggle || !this.navbar) return;
-
         this.menuToggle.addEventListener('click', () => this.toggle());
-
         this.navLinks.forEach(link => {
             link.addEventListener('click', () => this.close());
         });
-
-        // Fermer le menu en cliquant en dehors
         document.addEventListener('click', (e) => {
             if (!this.navbar.contains(e.target) && !this.menuToggle.contains(e.target)) {
                 this.close();
@@ -82,16 +78,10 @@ class TypedAnimations {
             console.warn('Typed.js not loaded');
             return;
         }
-
         const element = document.querySelector('.multiple');
         if (!element) return;
-
         new Typed('.multiple', {
-            strings: [
-                'Développeur Web',
-                'Gestionnaire de Données',
-                'Data Analyst',
-            ],
+            strings: ['Développeur Web', 'Gestionnaire de Données', 'Data Analyst'],
             typeSpeed: 80,
             backSpeed: 80,
             backDelay: 1200,
@@ -102,7 +92,7 @@ class TypedAnimations {
     }
 }
 
-// ===== SCROLL ANIMATIONS =====
+// ===== SCROLL ANIMATIONS (ÉLÉMENTS GÉNÉRAUX) =====
 class ScrollAnimations {
     constructor() {
         this.observerOptions = {
@@ -114,21 +104,18 @@ class ScrollAnimations {
 
     init() {
         const observer = new IntersectionObserver(
-            this.handleIntersection.bind(this),
+            (entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('scrolled');
+                        observer.unobserve(entry.target);
+                    }
+                });
+            },
             this.observerOptions
         );
-
         const elements = document.querySelectorAll('.scroll-element');
         elements.forEach(el => observer.observe(el));
-    }
-
-    handleIntersection(entries, observer) {
-        entries.forEach(entry => {
-            if (entry.isIntersecting) {
-                entry.target.classList.add('scrolled');
-                observer.unobserve(entry.target);
-            }
-        });
     }
 }
 
@@ -142,36 +129,23 @@ class ActiveNavigation {
     }
 
     init() {
-        window.addEventListener('scroll', debounce(
-            this.updateActiveLink.bind(this),
-            CONFIG.scrollDebounceDelay
-        ));
+        window.addEventListener('scroll', debounce(() => this.updateActiveLink(), CONFIG.scrollDebounceDelay));
     }
 
     updateActiveLink() {
         const scrollY = window.pageYOffset;
-
-        // Header shadow
         if (this.header) {
-            if (scrollY > 50) {
-                this.header.classList.add('scrolled');
-            } else {
-                this.header.classList.remove('scrolled');
-            }
+            if (scrollY > 50) this.header.classList.add('scrolled');
+            else this.header.classList.remove('scrolled');
         }
-
-        // Active link
         this.sections.forEach(section => {
             const sectionHeight = section.offsetHeight;
             const sectionTop = section.offsetTop - 100;
             const sectionId = section.getAttribute('id');
             const correspondingLink = document.querySelector(`nav a[href="#${sectionId}"]`);
-
             if (scrollY > sectionTop && scrollY <= sectionTop + sectionHeight) {
                 this.navLinks.forEach(link => link.classList.remove('active'));
-                if (correspondingLink) {
-                    correspondingLink.classList.add('active');
-                }
+                if (correspondingLink) correspondingLink.classList.add('active');
             }
         });
     }
@@ -182,132 +156,108 @@ class SmoothScroll {
     constructor() {
         this.init();
     }
-
     init() {
         document.querySelectorAll('a[href^="#"]').forEach(anchor => {
             anchor.addEventListener('click', (e) => {
                 e.preventDefault();
                 const targetId = anchor.getAttribute('href');
-
                 if (targetId === '#') return;
-
                 const targetElement = document.querySelector(targetId);
                 if (!targetElement) return;
-
-                const elementPosition = targetElement.getBoundingClientRect().top;
-                const offsetPosition = elementPosition + window.pageYOffset - CONFIG.headerOffset;
-
-                window.scrollTo({
-                    top: offsetPosition,
-                    behavior: 'smooth'
-                });
+                const offsetPosition = targetElement.getBoundingClientRect().top + window.pageYOffset - CONFIG.headerOffset;
+                window.scrollTo({ top: offsetPosition, behavior: 'smooth' });
             });
         });
     }
 }
 
-// ===== BARRES DE PROGRESSION (SKILLS) =====
+// ===== BARRES DE PROGRESSION (ANIMATION EN CASCADE AU SCROLL) =====
 class SkillProgressBars {
     constructor() {
+        this.skills = document.querySelectorAll(".skill-item");
+        this.animated = false;
         this.init();
     }
 
     init() {
-        const skills = document.querySelectorAll(".skill-item");
-        if (skills.length === 0) return;
+        if (this.skills.length === 0) return;
 
-        skills.forEach(skill => {
-            const progressBar = skill.querySelector(".skill-progress");
-            const percentText = skill.querySelector(".skill-percent");
-            const levelContainer = skill.querySelector(".skill-level");
-            const levelText = levelContainer ? levelContainer.querySelector("span") : null;
-
-            if (!progressBar || !percentText) return;
-
-            const progressValue = parseInt(progressBar.dataset.progress, 10) || 0;
-
-            // 1. Animation de la barre
-            requestAnimationFrame(() => {
-                progressBar.style.width = progressValue + "%";
-            });
-
-            // 2. Animation du pourcentage
-            let current = 0;
-            const increment = progressValue / 50;
-            const counter = setInterval(() => {
-                current += increment;
-                if (current >= progressValue) {
-                    current = progressValue;
-                    clearInterval(counter);
+        // On utilise un IntersectionObserver pour détecter l'arrivée sur la section
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                // Si la section est visible et n'a pas encore été animée
+                if (entry.isIntersecting && !this.animated) {
+                    this.animateInCascade();
+                    this.animated = true; // Empêche de relancer l'animation
+                    observer.unobserve(entry.target);
                 }
-                percentText.textContent = Math.round(current) + "%";
-            }, 30);
+            });
+        }, { threshold: 0.2 }); // Se déclenche quand 20% de la section est visible
 
-            // 3. Détermination du niveau
-            let level = "";
-            if (progressValue <= 40) {
-                level = "Débutant";
-            } else if (progressValue <= 70) {
-                level = "Intermédiaire";
-            } else {
-                level = "Avancé";
-            }
+        // On observe le conteneur parent des compétences
+        const skillsSection = document.querySelector(".technical-skills") || this.skills[0].parentElement;
+        if (skillsSection) observer.observe(skillsSection);
+    }
 
-            // 4. Animation du texte du niveau
-            if (levelContainer && levelText) {
-                setTimeout(() => {
-                    levelText.textContent = level;
-                    levelContainer.classList.remove("opacity-0", "translate-y-2");
-                    levelContainer.classList.add("opacity-100", "translate-y-0");
-                }, 800);
-            }
+    animateInCascade() {
+        this.skills.forEach((skill, index) => {
+            // Délai progressif : 200ms entre chaque barre
+            setTimeout(() => {
+                this.animateSingleSkill(skill);
+            }, index * 200);
         });
+    }
+
+    animateSingleSkill(skill) {
+        const progressBar = skill.querySelector(".skill-progress");
+        const percentText = skill.querySelector(".skill-percent");
+        const levelContainer = skill.querySelector(".skill-level");
+        const levelText = levelContainer ? levelContainer.querySelector("span") : null;
+
+        if (!progressBar || !percentText) return;
+
+        const value = parseInt(progressBar.dataset.progress, 10);
+        if (isNaN(value)) return;
+
+        // 1. Animation de la barre et du pourcentage
+        progressBar.style.width = value + "%";
+        percentText.textContent = value + "%";
+
+        // 2. Détermination du niveau (Logique utilisateur)
+        let level = "Débutant";
+        if (value >= 70) level = "Avancé";
+        else if (value >= 40) level = "Intermédiaire";
+
+        // 3. Mise à jour et affichage du niveau
+        if (levelText && levelContainer) {
+            levelText.textContent = level;
+            levelContainer.classList.remove("opacity-0", "translate-y-2");
+            levelContainer.classList.add("opacity-100", "translate-y-0");
+        }
     }
 }
 
 // ===== SYSTÈME DE NOTIFICATION =====
 class NotificationSystem {
-    constructor() {
-        this.createStyles();
-    }
-
+    constructor() { this.createStyles(); }
     createStyles() {
         if (document.getElementById('notification-styles')) return;
         const style = document.createElement('style');
         style.id = 'notification-styles';
         style.textContent = `
-               .notification {
-                   position: fixed;
-                   top: 100px;
-                   right: 20px;
-                   padding: 1rem 2rem;
-                   border-radius: 12px;
-                   box-shadow: 0 10px 30px rgba(0,0,0,0.3);
-                   z-index: 10000;
-                   animation: slideIn 0.5s ease;
-                   font-weight: 500;
-                   color: white;
-               }
+               .notification { position: fixed; top: 100px; right: 20px; padding: 1rem 2rem; border-radius: 12px; box-shadow: 0 10px 30px rgba(0,0,0,0.3); z-index: 10000; animation: slideIn 0.5s ease; font-weight: 500; color: white; }
                .notification.success { background: linear-gradient(135deg, #27ae60, #2ecc71); }
                .notification.error { background: linear-gradient(135deg, #e74c3c, #c0392b); }
-               @keyframes slideIn {
-                   from { transform: translateX(400px); opacity: 0; }
-                   to { transform: translateX(0); opacity: 1; }
-               }
-               @keyframes slideOut {
-                   from { transform: translateX(0); opacity: 1; }
-                   to { transform: translateX(400px); opacity: 0; }
-               }
+               @keyframes slideIn { from { transform: translateX(400px); opacity: 0; } to { transform: translateX(0); opacity: 1; } }
+               @keyframes slideOut { from { transform: translateX(0); opacity: 1; } to { transform: translateX(400px); opacity: 0; } }
            `;
         document.head.appendChild(style);
     }
-
     show(message, type = 'success') {
         const notification = document.createElement('div');
         notification.className = `notification ${type}`;
         notification.textContent = message;
         document.body.appendChild(notification);
-
         setTimeout(() => {
             notification.style.animation = 'slideOut 0.5s ease';
             setTimeout(() => notification.remove(), 500);
@@ -317,60 +267,37 @@ class NotificationSystem {
 
 // ===== GESTION DU FORMULAIRE =====
 class ContactForm {
-    constructor(notificationSystem) {
+    constructor(notifications) {
         this.form = document.getElementById('contactForm');
-        this.notifications = notificationSystem;
+        this.notifications = notifications;
         this.init();
     }
-
     init() {
         if (!this.form) return;
-        this.form.addEventListener('submit', (e) => this.handleSubmit(e));
-    }
-
-    async handleSubmit(e) {
-        e.preventDefault();
-        const submitBtn = this.form.querySelector('button[type="submit"]');
-        const originalText = submitBtn.innerHTML;
-
-        try {
-            submitBtn.disabled = true;
-            submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Envoi...';
-
-            const formData = new FormData(this.form);
-            const response = await fetch(this.form.action, {
-                method: 'POST',
-                body: formData,
-                headers: { 'Accept': 'application/json' }
-            });
-
-            if (response.ok) {
-                this.notifications.show('Message envoyé avec succès !');
-                this.form.reset();
-            } else {
-                throw new Error('Erreur serveur');
-            }
-        } catch (error) {
-            this.notifications.show('Erreur lors de l\'envoi. Réessayez.', 'error');
-        } finally {
-            submitBtn.disabled = false;
-            submitBtn.innerHTML = originalText;
-        }
+        this.form.addEventListener('submit', async (e) => {
+            e.preventDefault();
+            const submitBtn = this.form.querySelector('button[type="submit"]');
+            const originalText = submitBtn.innerHTML;
+            try {
+                submitBtn.disabled = true;
+                submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Envoi...';
+                const response = await fetch(this.form.action, { method: 'POST', body: new FormData(this.form), headers: { 'Accept': 'application/json' } });
+                if (response.ok) { this.notifications.show('Message envoyé avec succès !'); this.form.reset(); }
+                else throw new Error();
+            } catch (error) { this.notifications.show('Erreur lors de l\'envoi. Réessayez.', 'error'); }
+            finally { submitBtn.disabled = false; submitBtn.innerHTML = originalText; }
+        });
     }
 }
 
 // ===== TÉLÉCHARGEMENT DU CV =====
 class CVDownloader {
-    constructor() {
-        this.init();
-    }
-
+    constructor() { this.init(); }
     init() {
-        const downloadBtn = document.getElementById('downloadCV');
-        if (!downloadBtn) return;
-
-        downloadBtn.addEventListener('click', (event) => {
-            event.preventDefault();
+        const btn = document.getElementById('downloadCV');
+        if (!btn) return;
+        btn.addEventListener('click', (e) => {
+            e.preventDefault();
             const link = document.createElement('a');
             link.href = '/assets/CVAdam.pdf';
             link.download = 'CV-Adam-Poussi.pdf';
@@ -384,10 +311,6 @@ class CVDownloader {
 // ===== CLASSE PRINCIPALE PORTFOLIO =====
 class Portfolio {
     constructor() {
-        this.init();
-    }
-
-    init() {
         document.addEventListener('DOMContentLoaded', () => {
             this.notifications = new NotificationSystem();
             this.menu = new MobileMenu();
@@ -398,35 +321,10 @@ class Portfolio {
             this.skills = new SkillProgressBars();
             this.form = new ContactForm(this.notifications);
             this.cv = new CVDownloader();
-            this.welcomeMessage();
+            console.log('%c🚀 Portfolio chargé avec succès', 'color: #27ae60; font-size: 14px;');
         });
-    }
-
-    welcomeMessage() {
-        console.log(
-            '%c🚀 Développé avec passion par Adam Poussi',
-            'color: #27ae60; font-size: 14px;'
-        );
-        console.log(
-            '%c💼 Contactez-moi pour vos projets web!',
-            'color: #3498db; font-size: 14px;'
-        );
     }
 }
 
-// DÉMARRAGE
+// INITIALISATION
 const app = new Portfolio();
-
-// GESTION DES ERREURS GLOBALES
-window.addEventListener('error', (e) => {
-    console.error('Erreur détectée:', e.error);
-});
-
-// PERFORMANCE MONITORING
-window.addEventListener('load', () => {
-    if ('performance' in window && window.performance.timing) {
-        const perfData = window.performance.timing;
-        const pageLoadTime = perfData.loadEventEnd - perfData.navigationStart;
-        console.log(`⚡ Temps de chargement: ${pageLoadTime}ms`);
-    }
-});
