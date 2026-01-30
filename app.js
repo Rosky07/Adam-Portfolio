@@ -237,6 +237,76 @@ class SkillProgressBars {
     }
 }
 
+
+// ===== FORMULAIRE DE CONTACT =====
+// Initialisation EmailJS avec ta clé publique
+(function () {
+    emailjs.init("p_WWm94VaaylHEPTc"); // YOUR PUBLIC KEY
+})();
+
+document.getElementById("contact-form").addEventListener("submit", function (e) {
+    e.preventDefault(); // Empêcher le rechargement
+
+    // Récupération des valeurs du formulaire
+    const params = {
+        from_name: document.getElementById("from_name").value,
+        from_email: document.getElementById("from_email").value,
+        message: document.getElementById("message").value
+    };
+
+    // Fonction toast
+    const notification = {
+        show: (message, type) => {
+            const container = document.getElementById("toast-container");
+            const toast = document.createElement("div");
+            toast.className = `toast ${type}`;
+            toast.textContent = message;
+
+            container.appendChild(toast);
+
+            setTimeout(() => {
+                toast.remove();
+            }, 4000);
+        }
+    };
+
+    // Gestion popup
+    const popup = document.getElementById("popup");
+    const popupClose = document.getElementById("popup-close");
+
+    popupClose.addEventListener("click", () => {
+        popup.classList.add("hidden");
+    });
+
+    // Loader
+    const loader = document.getElementById("loader");
+
+    loader.classList.remove("hidden"); // 👉 Affiche le loader
+
+    emailjs.send("service_czmjzgx", "template_z13umki", params)
+        .then((response) => {
+            console.log("SUCCESS:", response);
+
+            loader.classList.add("hidden");         // 👉 Cache loader
+            notification.show("Message envoyé avec succès ! 🎉", "success");
+            popup.classList.remove("hidden");       // 👉 Popup animée
+
+            // 👉 Reset du formulaire après succès
+            document.getElementById("contact-form").reset();
+
+        }, (error) => {
+            loader.classList.add("hidden");         // 👉 Cache loader même en erreur
+            console.error("ERROR:", error);
+
+            notification.show("Une erreur est survenue. Réessaie plus tard.", "error");
+        });
+});
+
+// ===== FIN DU FORMULAIRE DE CONTACT =====
+
+
+
+
 // ===== SYSTÈME DE NOTIFICATION =====
 class NotificationSystem {
     constructor() { this.createStyles(); }
