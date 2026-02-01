@@ -585,10 +585,22 @@
 
     <!-- JavaScript -->
      <script type="text/javascript">
-    (function(){
-        emailjs.init("p_WWm94VaaylHEPTc"); // ← Votre clé publique ici
-    })();
-</script>
+        (function(){
+            emailjs.init("p_WWm94VaaylHEPTc"); // ← Votre clé publique ici
+        })();
+    </script>
+    <script>
+        const menuToggle = document.getElementById("menuToggle");
+        const navbar = document.getElementById("navbar");
+
+        menuToggle.addEventListener("click", () => {
+        navbar.classList.toggle("hidden");
+        menuToggle.setAttribute(
+            "aria-expanded",
+            navbar.classList.contains("hidden") ? "false" : "true");
+        });
+    </script>
+
     <script src="app.js"></script>
 </body>
 </html>
