@@ -517,7 +517,7 @@
                     <label for="message" class="text-white mb-2 font-medium">Message :</label>
                     <textarea id="message" name="message" rows="5" placeholder="Votre message..." required class="p-4 border-2 border-white/20 rounded-xl bg-white/10 text-white placeholder-gray-400 font-inherit transition-all duration-300 focus:outline-none focus:border-primary focus:bg-white/15 focus:shadow-[0_0_20px_rgba(255,136,0,0.3)] min-h-[150px] resize-vertical resize-none"></textarea>
                 </div>
-
+                
                 <button type="submit" class="btn-submit px-12 py-4 bg-gradient-to-r from-primary to-primary-light text-white border-none rounded-full text-lg font-semibold cursor-pointer transition-all duration-300 hover:-translate-y-1 hover:shadow-[0_15px_40px_rgba(255,136,0,0.6)] mt-4">Envoyer <i class="fas fa-paper-plane ml-2"></i></button>
             </form>
         </section>
@@ -600,6 +600,38 @@
             navbar.classList.contains("hidden") ? "false" : "true");
         });
     </script>
+
+
+   
+        <script>
+            const backToTop = document.getElementById("backToTop");
+
+            window.addEventListener("scroll", () => {
+            backToTop.classList.toggle("show", window.scrollY > 400);
+            });
+
+            backToTop.addEventListener("click", () => {
+            window.scrollTo({ top: 0, behavior: "smooth" });
+            });
+        </script>
+
+<script>
+const skills = document.querySelectorAll(".skill-progress");
+
+const observer = new IntersectionObserver(entries => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      const value = entry.target.dataset.progress;
+      entry.target.style.width = value + "%";
+      entry.target
+        .closest(".skill-item")
+        .querySelector(".skill-percent").textContent = value + "%";
+    }
+  });
+}, { threshold: 0.4 });
+
+skills.forEach(skill => observer.observe(skill));
+</script>
 
     <script src="app.js"></script>
 </body>
