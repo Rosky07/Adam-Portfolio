@@ -191,8 +191,8 @@
 
                 <!-- ===== EXPÉRIENCE 1 : GAUCHE ===== -->
                 <div class="grid grid-cols-1 md:grid-cols-[1fr_80px_1fr] gap-8 mb-24 items-start scroll-element">
-                    <!-- Contenu gauche -->
-                    <div class="md:text-right">
+                    <!-- Contenu gauche (s'affiche en premier sur mobile) -->
+                    <div class="md:text-right order-1 md:order-1">
                         <span class="text-primary font-semibold text-lg">Février 2023 - Présent</span>
                         <div class="mt-4 bg-white/10 backdrop-blur-[20px] border border-white/20 p-8 rounded-3xl shadow-lg hover:shadow-[0_20px_40px_rgba(255,136,0,0.3)] transition">
                             <h4 class="text-white text-2xl mb-2">Gestionnaire de Données Sanitaire</h4>
@@ -205,27 +205,27 @@
                         </div>
                     </div>
 
-                    <!-- Point central -->
-                    <div class="relative flex justify-center">
+                    <!-- Point central (sous la carte sur mobile) -->
+                    <div class="relative flex justify-center order-2 md:order-2">
                         <span class="w-5 h-5 bg-primary rounded-full shadow-[0_0_20px_rgba(255,136,0,0.5)] z-10"></span>
                     </div>
 
-                    <!-- Colonne droite vide -->
-                    <div></div>
+                    <!-- Colonne droite vide (seulement visible sur desktop) -->
+                    <div class="hidden md:block md:order-3"></div>
                 </div>
 
                 <!-- ===== EXPÉRIENCE 2 : DROITE ===== -->
                 <div class="grid grid-cols-1 md:grid-cols-[1fr_80px_1fr] gap-8 mb-24 items-start scroll-element">
-                    <!-- Colonne gauche vide -->
-                    <div></div>
+                    <!-- Colonne gauche vide (seulement visible sur desktop) -->
+                    <div class="hidden md:block"></div>
 
                     <!-- Point central -->
-                    <div class="relative flex justify-center">
+                    <div class="relative flex justify-center order-2 md:order-2">
                         <span class="w-5 h-5 bg-primary rounded-full shadow-[0_0_20px_rgba(255,136,0,0.5)] z-10"></span>
                     </div>
 
-                    <!-- Contenu droite -->
-                    <div>
+                    <!-- Contenu droite (passe en premier sur mobile) -->
+                    <div class="order-1 md:order-3">
                         <span class="text-primary font-semibold text-lg">Mars 2018 - Juin 2018</span>
                         <div class="mt-4 bg-white/10 backdrop-blur-[20px] border border-white/20 p-8 rounded-3xl shadow-lg hover:shadow-[0_20px_40px_rgba(255,136,0,0.3)] transition">
                             <h4 class="text-white text-2xl mb-2">Stagiaire en Développement Web</h4>
@@ -241,8 +241,8 @@
 
                 <!-- ===== EXPÉRIENCE 3 : GAUCHE ===== -->
                 <div class="grid grid-cols-1 md:grid-cols-[1fr_80px_1fr] gap-8 items-start scroll-element">
-                    <!-- Contenu gauche -->
-                    <div class="md:text-right">
+                    <!-- Contenu gauche (s'affiche en premier sur mobile) -->
+                    <div class="md:text-right order-1 md:order-1">
                         <span class="text-primary font-semibold text-lg">Mars 2018 - Juin 2018</span>
                         <div class="mt-4 bg-white/10 backdrop-blur-[20px] border border-white/20 p-8 rounded-3xl shadow-lg hover:shadow-[0_20px_40px_rgba(255,136,0,0.3)] transition">
                             <h4 class="text-white text-2xl mb-2">Formateur en Programmation (DevKids)</h4>
@@ -254,13 +254,13 @@
                         </div>
                     </div>
 
-                    <!-- Point central -->
-                    <div class="relative flex justify-center">
+                    <!-- Point central (sous la carte sur mobile) -->
+                    <div class="relative flex justify-center order-2 md:order-2">
                         <span class="w-5 h-5 bg-primary rounded-full shadow-[0_0_20px_rgba(255,136,0,0.5)] z-10"></span>
                     </div>
 
-                    <!-- Colonne droite vide -->
-                    <div></div>
+                    <!-- Colonne droite vide (seulement visible sur desktop) -->
+                    <div class="hidden md:block md:order-3"></div>
                 </div>
              </div>
         </section>
@@ -500,7 +500,7 @@
 
                 <!-- ===== SECTION CONTACT ===== -->
         <section id="contact" class="scroll-section py-32 max-w-2xl mx-auto text-center">
-            <h3 class="section-title scroll-element text-3xl md:text-4xl lg:text-5xl text-center mb-16 text-white font-bold relative after:content-[''] after:absolute after:bottom-[-10px] after:left-1/2 after:transform after:-translate-x-1/2 after:w-20 after:h-1 after:bg-gradient-to-r after:from-primary after:to-primary-light after:rounded">NOUS CONTACTER</h3>
+            <h3 class="section-title scroll-element text-3xl md:text-4xl lg:text-5xl text-center mb-16 text-white font-bold relative after:content-[''] after:absolute after:bottom-[-10px] after:left-1/2 after:transform after:-translate-x-1/2 after:w-20 after:h-1 after:bg-gradient-to-r after:from-primary after:to-primary-light after:rounded">ME CONTACTER</h3>
             
             <form id="contact-form" class="scroll-element flex flex-col gap-6 mt-8">
                 <div class="form-group flex flex-col text-left">
@@ -601,8 +601,6 @@
         });
     </script>
 
-
-   
         <script>
             const backToTop = document.getElementById("backToTop");
 
@@ -615,23 +613,23 @@
             });
         </script>
 
-<script>
-const skills = document.querySelectorAll(".skill-progress");
+        <script>
+        const skills = document.querySelectorAll(".skill-progress");
 
-const observer = new IntersectionObserver(entries => {
-  entries.forEach(entry => {
-    if (entry.isIntersecting) {
-      const value = entry.target.dataset.progress;
-      entry.target.style.width = value + "%";
-      entry.target
-        .closest(".skill-item")
-        .querySelector(".skill-percent").textContent = value + "%";
-    }
-  });
-}, { threshold: 0.4 });
+        const observer = new IntersectionObserver(entries => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+            const value = entry.target.dataset.progress;
+            entry.target.style.width = value + "%";
+            entry.target
+                .closest(".skill-item")
+                .querySelector(".skill-percent").textContent = value + "%";
+            }
+        });
+        }, { threshold: 0.4 });
 
-skills.forEach(skill => observer.observe(skill));
-</script>
+        skills.forEach(skill => observer.observe(skill));
+        </script>
 
     <script src="app.js"></script>
 </body>
