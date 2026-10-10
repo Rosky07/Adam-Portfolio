@@ -1954,19 +1954,23 @@
           const percent = item.querySelector(".skill-percent");
           const level = item.querySelector(".skill-level");
 
-          bar.style.transform = `scaleX(${value / 100})`;
+          bar.style.transition = "none";
+          bar.style.transform = "scaleX(0)";
           level.querySelector("span").textContent = levelOf(value);
           level.classList.remove("opacity-0", "translate-y-2");
 
           if (reduce) {
+            bar.style.transform = `scaleX(${value / 100})`;
             percent.textContent = value + "%";
             return;
           }
-          const start = performance.now();
+          let start;
           const duration = 1800;
           const tick = (now) => {
+            if (start === undefined) start = now;
             const p = Math.min((now - start) / duration, 1);
             const eased = 1 - Math.pow(1 - p, 3);
+            bar.style.transform = `scaleX(${(value * eased) / 100})`;
             percent.textContent = Math.round(value * eased) + "%";
             if (p < 1) requestAnimationFrame(tick);
           };
