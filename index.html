@@ -102,6 +102,126 @@
       };
     </script>
 
+    <style>
+      .portrait-scene {
+        position: relative;
+        width: min(100%, 520px);
+        margin-inline: auto;
+        aspect-ratio: 1;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+
+      .portrait-scene::before {
+        content: "";
+        position: absolute;
+        inset: 0;
+        border-radius: 50%;
+        background:
+          radial-gradient(circle, rgba(255, 136, 0, 0.18) 0%, rgba(255, 136, 0, 0.06) 28%, transparent 54%),
+          radial-gradient(circle at center, rgba(9, 13, 19, 0.55), rgba(9, 13, 19, 0.9));
+        box-shadow: 0 0 0 4px rgba(255, 136, 0, 0.18), 0 0 28px rgba(255, 136, 0, 0.34);
+      }
+
+      .portrait-scene::after {
+        content: "";
+        position: absolute;
+        inset: 7% 9%;
+        border-radius: 50%;
+        border: 5px solid rgba(255, 136, 0, 0.92);
+        box-shadow: 0 0 18px rgba(255, 136, 0, 0.8), inset 0 0 24px rgba(255, 136, 0, 0.42);
+        background: radial-gradient(circle at center, rgba(255, 136, 0, 0.08), transparent 62%);
+        pointer-events: none;
+      }
+
+      .portrait-scene .portrait-ring {
+        position: absolute;
+        inset: 11% 13% 9%;
+        border-radius: 50%;
+        border: 3px solid rgba(255, 136, 0, 0.22);
+        border-style: dashed;
+        transform: rotate(8deg);
+        opacity: 0.9;
+      }
+
+      .portrait-scene .portrait-ring::before,
+      .portrait-scene .portrait-ring::after {
+        content: "";
+        position: absolute;
+        width: 14px;
+        height: 14px;
+        background: linear-gradient(135deg, #ff8c1a, #ffb960);
+        clip-path: polygon(50% 0%, 100% 100%, 0% 100%);
+        right: 6%;
+        top: 18%;
+        box-shadow: 0 0 10px rgba(255, 170, 68, 0.9);
+      }
+
+      .portrait-scene .portrait-ring::after {
+        right: 16%;
+        top: 72%;
+        transform: rotate(180deg);
+      }
+
+      .portrait-scene .portrait-frame {
+        position: relative;
+        z-index: 1;
+        width: 72%;
+        height: 72%;
+        display: flex;
+        align-items: flex-end;
+        justify-content: center;
+        border-radius: 50%;
+        overflow: hidden;
+        background: rgba(6, 10, 18, 0.2);
+        box-shadow: inset 0 0 30px rgba(255, 170, 68, 0.08);
+      }
+
+      .portrait-scene .portrait-image {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        object-position: center top;
+        transform: scale(1.06);
+        filter: drop-shadow(0 18px 18px rgba(0, 0, 0, 0.5));
+      }
+
+      .portrait-scene .portrait-bg {
+        position: absolute;
+        inset: 0;
+        border-radius: 50%;
+        background-image: radial-gradient(rgba(14, 32, 60, 0.92) 1.2px, transparent 1.2px);
+        background-size: 18px 18px;
+        opacity: 0.5;
+        mix-blend-mode: screen;
+        z-index: 0;
+      }
+
+      .landing-portrait {
+        width: 11rem;
+      }
+
+      .home-portrait {
+        width: min(100%, 460px);
+      }
+
+      .home-portrait .portrait-image {
+        object-position: center 18%;
+        transform: scale(1.12);
+      }
+
+      .about-portrait .portrait-scene {
+        width: min(100%, 440px);
+      }
+
+      @media (max-width: 640px) {
+        .portrait-scene {
+          width: min(100%, 360px);
+        }
+      }
+    </style>
+
     <!-- Typed.js -->
     <script src="https://cdn.jsdelivr.net/npm/typed.js@2.0.12"></script>
 
@@ -159,19 +279,19 @@
         class="relative m-auto flex w-full max-w-2xl flex-col items-center transition-all duration-500 ease-out"
       >
         <!-- Logo avec anneau en rotation -->
-        <div
-          class="relative mb-8 h-24 w-24 animate-zoom-in motion-reduce:animate-none sm:h-28 sm:w-28"
-        >
-          <div
-            aria-hidden="true"
-            class="absolute -inset-3 rounded-full border-2 border-dashed border-primary/40 animate-spin-slow motion-reduce:animate-none"
-          ></div>
+        <!-- Portrait détouré devant l'anneau lumineux -->
+      <div class="portrait-scene landing-portrait mb-8 w-44 animate-zoom-in motion-reduce:animate-none sm:w-52">
+        <div class="portrait-bg" aria-hidden="true"></div>
+        <div class="portrait-ring" aria-hidden="true"></div>
+        <div class="portrait-frame">
           <img
             src="./assets/adam3.JPG"
             alt="Photo d'Adam Poussi"
-            class="h-full w-full rounded-full border-4 border-primary object-cover shadow-[0_0_30px_rgba(255,136,0,0.35)]"
+            class="portrait-image animate-float motion-reduce:animate-none"
           />
         </div>
+      </div>
+
 
         <p
           class="mb-3 flex items-center gap-3 text-xs font-medium uppercase tracking-[0.3em] text-primary animate-fade-up motion-reduce:animate-none [animation-delay:300ms]"
@@ -462,17 +582,16 @@
         <div
           class="home-img flex flex-1 items-center justify-center animate-zoom-in motion-reduce:animate-none [animation-delay:500ms]"
         >
-          <div class="relative w-full max-w-md">
-            <!-- Anneau en rotation lente -->
-            <div
-              aria-hidden="true"
-              class="absolute -inset-3 rounded-full border-2 border-dashed border-primary/40 animate-spin-slow motion-reduce:animate-none"
-            ></div>
-            <img
-              src="./assets/adam3.JPG"
-              alt="Photo de profil Adam Poussi"
-              class="relative aspect-square h-auto w-full rounded-full border-4 border-orange-300/30 object-cover shadow-[0_20px_40px_rgba(255,136,0,0.2)] animate-float motion-reduce:animate-none"
-            />
+          <div class="portrait-scene home-portrait">
+            <div class="portrait-bg" aria-hidden="true"></div>
+            <div class="portrait-ring" aria-hidden="true"></div>
+            <div class="portrait-frame">
+              <img
+                src="./assets/adam1.PNG"
+                alt="Photo de profil Adam Poussi"
+                class="portrait-image animate-float motion-reduce:animate-none"
+              />
+            </div>
           </div>
         </div>
       </section>
@@ -529,14 +648,24 @@
               </a>
             </div>
           </div>
-          <div class="hero-image text-center" data-reveal="right">
-            <img
-              src="./assets/adam1.PNG"
-              alt="Adam Poussi - Développeur Web"
-              loading="lazy"
-              class="photo mx-auto aspect-square h-auto w-full max-w-sm rounded-full border-4 border-orange-300/30 object-cover shadow-[0_20px_40px_rgba(255,136,0,0.2)] transition-all duration-300 animate-float hover:rotate-2 hover:scale-105 hover:border-primary hover:shadow-[0_30px_60px_rgba(255,136,0,0.4)] motion-reduce:animate-none"
-            />
+
+        <div class="hero-image text-center about-portrait" data-reveal="right">
+          <div class="portrait-scene group">
+            <div class="portrait-bg" aria-hidden="true"></div>
+            <div class="portrait-ring" aria-hidden="true"></div>
+            <div class="portrait-frame">
+              <img
+                src="./assets/adam2.JPG"
+                alt="Adam Poussi - Développeur Web"
+                loading="lazy"
+                class="portrait-image"
+              />
+            </div>
           </div>
+        </div>
+
+
+
         </div>
       </section>
 
