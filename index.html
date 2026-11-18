@@ -203,7 +203,7 @@
       }
 
       .about-portrait .portrait-scene {
-        width: min(100%, 440px);
+        width: min(100%, 480px);
       }
 
       .profile-shell {
@@ -253,6 +253,7 @@
 
       .landing-profile .profile-photo {
         object-position: center 12%;
+        transform: scale(1.1);
       }
 
       .home-profile {
@@ -260,18 +261,12 @@
         aspect-ratio: 1;
       }
 
-      .about-profile {
-        width: min(100%, 448px);
-        aspect-ratio: 1;
-        margin-inline: auto;
-      }
-
-      .about-profile .profile-photo {
-        object-position: center 20%;
-      }
-
       @media (max-width: 640px) {
         .portrait-scene {
+          width: min(100%, 360px);
+        }
+
+        .about-portrait .portrait-scene {
           width: min(100%, 360px);
         }
 
@@ -319,9 +314,9 @@
           class="relative mb-10 h-52 w-52 animate-zoom-in motion-reduce:animate-none sm:h-64 sm:w-64 lg:h-72 lg:w-72 xl:h-96 xl:w-96">
           <div class="landing-profile profile-shell">
             <img
-              src="./assets/AdamP3.PNG"
+              src="./assets/AdamP1.PNG"
               alt="Portrait d'Adam Poussi"
-              class="profile-photo" />
+              class="profile-photo"/>
           </div>
         </div>
 
@@ -455,13 +450,19 @@
         <div class="hero-content mx-auto grid max-w-6xl grid-cols-1 items-center gap-12 lg:grid-cols-2 lg:gap-20">
           
            <div class="hero-image text-center" data-reveal="right">
-            <div class="about-profile profile-shell">
-            <img
-              src="./assets/AdamP2.PNG"
-              alt="Adam Poussi - Développeur Web"
-              loading="lazy"
-              class="profile-photo photo transition-transform duration-300 hover:rotate-1 hover:scale-[1.03] motion-reduce:animate-none"
-            />
+            <div class="about-portrait">
+              <div class="portrait-scene">
+                <div class="portrait-ring" aria-hidden="true"></div>
+                <div class="portrait-bg" aria-hidden="true"></div>
+                <div class="portrait-frame">
+                  <img
+                    src="./assets/adam4.PNG"
+                    alt="Adam Poussi - Développeur Web"
+                    loading="lazy"
+                    class="portrait-image photo transition-transform duration-300 hover:scale-[1.03]"
+                  />
+                </div>
+              </div>
             </div>
           </div>
           
